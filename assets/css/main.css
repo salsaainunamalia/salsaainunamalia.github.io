@@ -805,6 +805,9 @@ section,
 .hero .hero-image img {
   position: relative;
   z-index: 2;
+  max-width: 450px;
+  height: auto;
+  object-fit: cover;
 }
 
 .hero .hero-image .shape-1,
