@@ -801,13 +801,14 @@ section,
   gap: 1rem; 
   flex-wrap: wrap;
   align-items: center;
+  justify-content: flex-start;
 }
 
 .hero-buttons a {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 56px; /* pastikan tinggi sama */
+  height: 56px;
   padding: 0 24px;
   font-size: 16px;
   border-radius: 28px;
