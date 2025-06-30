@@ -720,6 +720,19 @@ section,
   }
 }
 
+@media (max-width: 768px) {
+  .hero-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-image img {
+    max-width: 80%;
+    height: auto;
+  }
+}
+
 .hero .content h2 {
   font-size: 3.5rem;
   font-weight: 700;
