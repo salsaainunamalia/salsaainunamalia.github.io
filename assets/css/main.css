@@ -706,6 +706,20 @@ section,
   overflow: hidden;
 }
 
+@media (max-width: 768px) {
+  .hero .hero-image {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero .hero-image img {
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
 .hero .content h2 {
   font-size: 3.5rem;
   font-weight: 700;
