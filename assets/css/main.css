@@ -841,21 +841,6 @@ section,
     padding: 60px 0;
   }
 
-  .hero .hero-image .image-wrapper::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(10px);
-  mask-image: url('assets/img/profile/profile-home.png');
-  mask-size: contain;
-  mask-repeat: no-repeat;
-  mask-position: bottom;
-  z-index: 5;
-}
-
   
 }
   
@@ -966,6 +951,12 @@ section,
   display: flex;
   align-items: center;
   gap: 1.5rem;
+}
+
+.email-wrapper {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 .about .signature .signature-image {
