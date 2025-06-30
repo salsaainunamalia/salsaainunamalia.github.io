@@ -841,6 +841,24 @@ section,
     padding: 60px 0;
   }
 
+  .hero .hero-image .image-wrapper {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.hero .hero-image .image-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+  pointer-events: none;
+  z-index: 3;
+}
+  
   .hero .cta-buttons {
     justify-content: center;
   }
@@ -853,6 +871,8 @@ section,
     margin-top: 3rem;
   }
 }
+
+
 
 @keyframes morphShape {
   0% {
