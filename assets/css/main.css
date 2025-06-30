@@ -841,22 +841,22 @@ section,
     padding: 60px 0;
   }
 
-  .hero .hero-image .image-wrapper {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-}
-
-.hero .hero-image .image-wrapper::after {
+  .hero .hero-image .image-wrapper::after {
   content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
-  pointer-events: none;
-  z-index: 3;
+  height: 100%;
+  backdrop-filter: blur(10px);
+  mask-image: url('assets/img/profile/profile-home.png');
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  mask-position: bottom;
+  z-index: 5;
+}
+
+  
 }
   
   .hero .cta-buttons {
