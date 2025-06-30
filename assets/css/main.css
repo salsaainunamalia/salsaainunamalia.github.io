@@ -953,9 +953,8 @@ section,
   gap: 1.5rem;
 }
 
-.email-wrapper {
+.info-item .value {
   word-break: break-word;
-  overflow-wrap: break-word;
   white-space: normal;
 }
 
