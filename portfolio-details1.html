@@ -44,7 +44,7 @@
       <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.webp" alt=""> -->
-        <h1 class="sitename">EasyFolio</h1>
+        <h1 class="sitename">Salsa Ainun Amalia</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -74,15 +74,15 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house"></i> Home</a></li>
-            <li class="breadcrumb-item"><a href="ndex.html#portfolio">Category</a></li>
+            <li class="breadcrumb-item"><a href="index.html#portfolio">Category</a></li>
             <li class="breadcrumb-item active current">Portfolio Details</li>
           </ol>
         </nav>
       </div>
 
       <div class="title-wrapper">
-        <h1>Portfolio Details</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>
+        <h1>Project Details</h1>
+        <p>After identifying several issues related to SKU mismatches on Sinergi's ERP system, I decided to take a hands-on approach to understand and resolve the problem.</p>
       </div>
     </div><!-- End Page Title -->
 
@@ -93,58 +93,79 @@
 
         <div class="row gy-4 g-lg-5">
           <div class="col-lg-6">
-            <img src="assets/img/portfolio/portfolio-1.webp" class="img-fluid mb-4" alt="">
-            <img src="assets/img/portfolio/portfolio-10.webp" class="img-fluid mb-4" alt="">
-            <img src="assets/img/portfolio/portfolio-7.webp" class="img-fluid mb-4" alt="">
-            <img src="assets/img/portfolio/portfolio-4.webp" class="img-fluid mb-4" alt="">
-            <img src="assets/img/portfolio/portfolio-5.webp" class="img-fluid mb-4" alt="">
-            <img src="assets/img/portfolio/portfolio-11.webp" class="img-fluid mb-4" alt="">
-            <img src="assets/img/portfolio/portfolio-8.webp" class="img-fluid mb-4" alt="">
+            <img src="https://ik.imagekit.io/r6talylrh/order-pending?updatedAt=1751438086590" class="img-fluid mb-4" alt="">
+            
+            <img src="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="img-fluid mb-4" alt="">
+            
+            <img src="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="img-fluid mb-4" alt="">
+            
+            <img src="https://ik.imagekit.io/r6talylrh/sku-mapping?updatedAt=1751440161332" class="img-fluid mb-4" alt="">
+            
+            <img src="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="img-fluid mb-4" alt="">
+            
+            <img src="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="img-fluid mb-4" alt="">
+            
+            <img src="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="img-fluid mb-4" alt="">
+
           </div>
 
           <div class="col-lg-6">
 
             <div class="position-sticky" style="top: 40px">
               <div class="portfolio-description">
-                <h2>This is an example of portfolio details</h2>
+                <h2>Order Data Cleanup & Optimization in ERP (Perpack)</h2>
                 <p>
-                  Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+                  In this project, I simulated a real-world scenario I encountered during my time as a Database Administrator at a skincare retail company. The problem? SKU inconsistencies across multiple systems made it difficult to track product transactions properly — especially when identifying pending orders. Some systems still used old SKUs, some used new SKUs, and some used both. This caused chaos when analyzing transaction data or trying to match product movement. So I built a solution using a SKU mapping table that unified the SKU logic and helped me clean and align the data.
                 </p>
+                <h2>The Data Structure</h2>
                 <p>
-                  Amet consequatur qui dolore veniam voluptatem voluptatem sit. Non aspernatur atque natus ut cum nam et. Praesentium error dolores rerum minus sequi quia veritatis eum. Eos et doloribus doloremque nesciunt molestiae laboriosam.
+                  I worked with three main tables:
                 </p>
-
-                <div class="testimonial-item">
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
-                    <i class="bi bi-quote quote-icon-right"></i>
+                <ul>
+                  <li>
+                    <strong>products</strong> – the product catalog with all active SKUs
+                  </li>
+                  <li>
+                    <strong>transactions</strong> – a list of sales and pending orders (some using old SKUs)
+                  </li>
+                  <li>
+                    <strong>sku_mapping</strong> – the key to everything! It contains:
+                    <ul>
+                      <li><strong>sku:</strong> can be either the old or new SKU</li>
+                      <li><strong>desc:</strong> explains whether the SKU is an "old" or "new" one</li>
+                      <li><strong>new_sku:</strong> the standardized SKU that we want everything to align with</li>
+                    </ul>
+                  </li>
+                </ul>
+                <h2>My Role in the Process</h2>
+                <p>
+                  As a DBA, i designed the flow so every incoming transaction (regardless of SKU version) could be translated into a standardized SKU, using the mapping table as the translator. Once all SKUs were normalized, I ran checks to find orders that were still in "pending" status but had valid, active SKUs in the product master. This helped other teams (like fulfillment and ops) take action quickly.
+                </p>
+                <h2>Why This Matters</h2>
+                                  <p>
+                    A pending order might seem small, but when you're dealing with hundreds or thousands per day — and SKUs don't match — it's a nightmare.
                   </p>
-                  <div>
-                    <img src="assets/img/person/person-f-5.webp" class="testimonial-img" alt="">
-                    <h3>Sara Wilsson</h3>
-                    <h4>Designer</h4>
-                  </div>
-                </div>
+                  <p>This approach:</p>
+                  <ul>
+                    <li>Prevented missing or misread orders</li>
+                    <li>Improved data alignment between departments</li>
+                    <li>Enabled faster decision-making (and cleaner dashboards!)</li>
+                  </ul>
 
+                <h2>Takeaway</h2>
                 <p>
-                  Impedit ipsum quae et aliquid doloribus et voluptatem quasi. Perspiciatis occaecati earum et magnam animi. Quibusdam non qui ea vitae suscipit vitae sunt. Repudiandae incidunt cumque minus deserunt assumenda tempore. Delectus voluptas necessitatibus est.
+                  <i>"You can't analyze what you can't align."</i>
                 </p>
-
-                <p>
-                  Sunt voluptatum sapiente facilis quo odio aut ipsum repellat debitis. Molestiae et autem libero. Explicabo et quod necessitatibus similique quis dolor eum. Numquam eaque praesentium rem et qui nesciunt.
-                </p>
+                <p>This project taught me that even small inconsistencies like SKU mismatches can ripple into huge operational delays. As a DBA, my job isn’t just keeping the database alive — it’s making sure the data inside it actually makes sense.</p>
 
               </div>
 
               <div class="portfolio-info mt-5">
                 <h3>Project information</h3>
                 <ul>
-                  <li><strong>Category</strong> Web design</li>
-                  <li><strong>Client</strong> ASU Company</li>
-                  <li><strong>Project date</strong> 01 March, 2020</li>
-                  <li><strong>Project URL</strong> <a href="#">www.example.com</a></li>
-                  <li><a href="#" class="btn-visit align-self-start">Visit Website</a></li>
+                  <li><strong>Category</strong> Learning & Independent Project</li>
+                  <li><strong>Department/Team</strong> Warehouse Team & Self-Initiated</li>
+                  <li><strong>Project date</strong> June - July, 2025</li>
                 </ul>
               </div>
             </div>
