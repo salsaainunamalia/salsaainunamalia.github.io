@@ -50,10 +50,10 @@
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#resume">Resume</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#resume">Resume</a></li>
           <li><a href="portfolio-details.html">Portfolio</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -94,19 +94,19 @@
         <div class="row gy-4 g-lg-5">
           <div class="col-lg-6">
             <img src="https://ik.imagekit.io/r6talylrh/order-pending?updatedAt=1751438086590" class="img-fluid mb-4" alt="">
-            
+            <p><b>Desc: </b><i>Initial dashboard shows 3000++ pending sales orders, indicating potential data mismatches.</i></p>
             <img src="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="img-fluid mb-4" alt="">
-            
+            <p><b>Desc: </b><i>Extracted dummy transaction data to investigate SKU inconsistencies across platforms.</i></p>
             <img src="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="img-fluid mb-4" alt="">
-            
-            <img src="https://ik.imagekit.io/r6talylrh/sku-mapping?updatedAt=1751440161332" class="img-fluid mb-4" alt="">
-            
+            <p><b>Desc: </b><i>Used dummy product master data to match SKU codes with product names and variations.</i></p>
+            <img src="https://ik.imagekit.io/r6talylrh/sku-mapping2" class="img-fluid mb-4" alt="">
+            <p><b>Desc: </b><i>Created a dummy mapping table to standardize old SKUs (ID-xxx) into new SKUs (SKU-xxx) for consistent reporting and analytics.</i></p>
             <img src="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="img-fluid mb-4" alt="">
-            
+            <p><b>Desc: </b><i>Designed a simplified ERD focused only on the core tables involved in the SKU inconsistency issue.</i></p>
             <img src="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="img-fluid mb-4" alt="">
-            
+            <p><b>Desc: </b><i>Queried unmatched dummy SKUs that are missing in the SKU mapping table, identifying root causes of failed order sync.</i></p>
             <img src="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="img-fluid mb-4" alt="">
-
+            <p><b>Desc: </b><i>Applied COALESCE() to merge old and new dummy SKUs, creating a consistent final SKU reference.</i></p>
           </div>
 
           <div class="col-lg-6">
@@ -164,7 +164,7 @@
                 <h3>Project information</h3>
                 <ul>
                   <li><strong>Category</strong> Learning & Independent Project</li>
-                  <li><strong>Department/Team</strong> Warehouse Team & Self-Initiated</li>
+                  <li><strong>Tools</strong>MySQL Workbench, Excel</li>
                   <li><strong>Project date</strong> June - July, 2025</li>
                 </ul>
               </div>
