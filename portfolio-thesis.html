@@ -59,7 +59,7 @@
       </nav>
 
       <div class="header-social-links">
-        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-fill"></i></a>
+        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
         <a href="https://www.linkedin.com/in/salsa-ainun-amalia8/" class="linkedin"><i class="bi bi-linkedin"></i></a>
       </div>
 
@@ -73,7 +73,7 @@
       <div class="breadcrumbs">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house"></i>Home</a></li>
             <li class="breadcrumb-item"><a href="index.html#portfolio">Category</a></li>
             <li class="breadcrumb-item active current">Portfolio Details</li>
           </ol>
@@ -96,37 +96,22 @@
               <a href="https://ik.imagekit.io/r6talylrh/UML?updatedAt=1751531016502" class="glightbox">
                 <img src="https://ik.imagekit.io/r6talylrh/UML?updatedAt=1751531016502" class="img-fluid mb-4" alt="">
               </a>
-              <p><b>Desc: </b><i>Initial dashboard shows 3000++ pending sales orders, indicating potential data mismatches.</i></p>
+              <p><b>Desc: </b><i>Describes the high-level functionalities available to the system's primary actor (Admin/Owner), including supplier evaluation, order management, product handling, and login access. This diagram outlines the system’s scope and user interactions.</i></p>
             
-              <a href="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="img-fluid mb-4" alt="">
+              <a href="https://ik.imagekit.io/r6talylrh/activity-diagram?updatedAt=1751531016460" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/activity-diagram?updatedAt=1751531016460" class="img-fluid mb-4" alt="">
               </a>
-              <p><b>Desc: </b><i>Extracted dummy transaction data to investigate SKU inconsistencies across platforms.</i></p>
+              <p><b>Desc: </b><i>Illustrates the business process of managing rice supplier data, including how users (Admin/Owner) can add, edit, or delete product information. The system validates and stores changes accordingly.</i></p>
             
-              <a href="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="img-fluid mb-4" alt="">
+              <a href="https://ik.imagekit.io/r6talylrh/sequence-diagram?updatedAt=1751531016472" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/sequence-diagram?updatedAt=1751531016472" class="img-fluid mb-4" alt="">
               </a>
-              <p><b>Desc: </b><i>Used dummy product master data to match SKU codes with product names and variations.</i></p>
+              <p><b>Desc: </b><i>Shows the sequence of interactions between user interface, controller, and database when managing product data. It includes create, update, and delete operations triggered by the admin.</i></p>
             
-              <a href="https://ik.imagekit.io/r6talylrh/sku-mapping2" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/sku-mapping2" class="img-fluid mb-4" alt="">
+              <a href="https://ik.imagekit.io/r6talylrh/class-diagram?updatedAt=1751531016533" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/class-diagram?updatedAt=1751531016533" class="img-fluid mb-4" alt="">
               </a>
-              <p><b>Desc: </b><i>Created a dummy mapping table to standardize old SKUs (ID-xxx) into new SKUs (SKU-xxx) for consistent reporting and analytics.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Designed a simplified ERD focused only on the core tables involved in the SKU inconsistency issue.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Queried unmatched dummy SKUs that are missing in the SKU mapping table, identifying root causes of failed order sync.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Applied COALESCE() to merge old and new dummy SKUs, creating a consistent final SKU reference.</i></p>
+              <p><b>Desc: </b><i>Defines the system structure and its core entities such as Supplier, Product, Order, and AHP calculation components. It represents how data and functions are organized and related within the application.</i></p>
             </div>
 
 
@@ -134,60 +119,61 @@
 
             <div class="position-sticky" style="top: 40px">
               <div class="portfolio-description">
-                <h2>Order Data Cleanup & Optimization in ERP (Perpack)</h2>
+                <h2>AHP-Based Supplier Selection System</h2>
                 <p>
-                  In this project, I simulated a real-world scenario I encountered during my time as a Database Administrator at a skincare retail company. The problem? SKU inconsistencies across multiple systems made it difficult to track product transactions properly — especially when identifying pending orders. Some systems still used old SKUs, some used new SKUs, and some used both. This caused chaos when analyzing transaction data or trying to match product movement. So I built a solution using a SKU mapping table that unified the SKU logic and helped me clean and align the data.
+                  In the competitive world of retail, especially in the food staple sector like rice, choosing the right supplier can make or break a business. This project originated from a real challenge faced by Toko Beras Madura, a rice retail store operating in a densely populated market area. 
+                  While demand was consistently high, the store struggled to select rice suppliers who could offer both competitive pricing and high product quality. Without a proper evaluation system, the decision-making process became subjective and inconsistent — leading to customer dissatisfaction and reduced profit margins.
+                  To address this, I proposed and developed a Decision Support System (DSS) using the Analytical Hierarchy Process (AHP) method. The system helps evaluate and rank potential suppliers based on criteria such as price, quality, delivery time, and reliability.
                 </p>
-                <h2>The Data Structure</h2>
+                  <h2>My Role in This Project</h2>
                 <p>
-                  I worked with three main tables:
+                  IThroughout this project, I was fully involved in the end-to-end process, from analyzing system needs to designing both the database and user interface flow.
+                  Here’s what I worked on:
                 </p>
                 <ul>
                   <li>
-                    <strong>products</strong> – the product catalog with all active SKUs
+                    <strong>Understanding business problems:</strong> I studied how the rice retail business selects its suppliers and identified the key pain points that needed to be solved.
                   </li>
                   <li>
-                    <strong>transactions</strong> – a list of sales and pending orders (some using old SKUs)
+                    <strong>Modeling system behavior:</strong> I created various UML diagrams — such as use case, activity, sequence, and class diagrams — to illustrate how the system should operate based on user needs.
                   </li>
                   <li>
-                    <strong>sku_mapping</strong> – the key to everything! It contains:
-                    <ul>
-                      <li><strong>sku:</strong> can be either the old or new SKU</li>
-                      <li><strong>desc:</strong> explains whether the SKU is an "old" or "new" one</li>
-                      <li><strong>new_sku:</strong> the standardized SKU that we want everything to align with</li>
-                    </ul>
+                    <strong>Designing the database structure:</strong> I developed a complete Entity Relationship Diagram (ERD) to define how the data would be stored and connected logically, with proper relationships to support the AHP method.
+                  </li>
+                  <li>
+                    <strong>Building a scalable data model:</strong> I structured the tables to support comparisons, scoring, and decision ranking in a way that’s ready for implementation.
+                  </li>
+                  <li>
+                    <strong>Visualizing the interface:</strong> I also designed simple wireframes to simulate how users would interact with the system when evaluating suppliers.
                   </li>
                 </ul>
-                <h2>My Role in the Process</h2>
+                <h2>Challenges Faced & How I Overcame Them</h2>
                 <p>
-                  As a DBA, i designed the flow so every incoming transaction (regardless of SKU version) could be translated into a standardized SKU, using the mapping table as the translator. Once all SKUs were normalized, I ran checks to find orders that were still in "pending" status but had valid, active SKUs in the product master. This helped other teams (like fulfillment and ops) take action quickly.
+                 One of the biggest challenges I faced during this project was figuring out how to turn a real-world business issue into a structured system design. As a student, I didn’t have prior experience with formal system modeling, so learning how to choose and create the right UML diagrams took a lot of trial and error.
                 </p>
-                <h2>Why This Matters</h2>
-                   <p>
-                    A pending order might seem small, but when you're dealing with hundreds or thousands per day — and SKUs don't match — it's a nightmare.
-                  </p>
-                  <p>This approach:</p>
-                  <ul>
-                    <li>Prevented missing or misread orders</li>
-                    <li>Improved data alignment between departments</li>
-                    <li>Enabled faster decision-making (and cleaner dashboards!)</li>
-                  </ul>
+                <p>
+                  Another difficulty was designing the database structure to support the AHP method. I had to think beyond just storing data — I needed to make sure the structure could handle pairwise comparisons, weighting, and result calculation in a logical and scalable way.
+                </p>
+                <p>
+                  To overcome these, I did a lot of research, looked at example systems, and broke the work into smaller parts. I started by focusing on one table at a time, validating each step, and continuously testing whether the flow made sense for the end user. It was challenging, but also one of the most rewarding learning processes in my academic journey.
+                </p>
 
                 <h2>Takeaway</h2>
                 <p>
-                  <i>"You can't analyze what you can't align."</i>
+                  <i>“What mattered wasn’t how much I knew at the start, but how willing I was to figure things out along the way."</i>
                 </p>
-                <p>This project taught me that even small inconsistencies like SKU mismatches can ripple into huge operational delays. As a DBA, my job isn’t just keeping the database alive — it’s making sure the data inside it actually makes sense.</p>
+                <p>I didn’t start this project as an expert, but by breaking down the problem, doing research, and staying curious, I ended up understanding more than I thought I could. This experience showed me how much we can learn by just starting and figuring things out along the way.</p>
 
               </div>
 
               <div class="portfolio-info mt-5">
                 <h3>Project information</h3>
                 <ul>
-                  <li><strong>Category</strong> Learning & Independent Project</li>
-                  <li><strong>Tools</strong>MySQL Workbench, Excel</li>
-                  <li><strong>Project date</strong> June - July, 2025</li>
-                </ul>
+                  <li><strong>Category</strong>System Design & Analyst</li>
+                  <li><strong>Tools</strong>Netbeans, draw.io, phpMyAdmin, Excel</li>
+                  <li><strong>Project URL</strong> <a href="https://ik.imagekit.io/r6talylrh/analyst-system?updatedAt=1751531064097">See my project?</a></li>
+                  <li><strong>Project date</strong> Feb - Aug, 2024</li>
+                  </ul>
               </div>
             </div>
 
