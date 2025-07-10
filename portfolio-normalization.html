@@ -1,1 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Portfolio Details</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: EasyFolio
+  * Template URL: https://bootstrapmade.com/easyfolio-bootstrap-portfolio-template/
+  * Updated: Feb 21 2025 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <h1 class="sitename">Salsa Ainun Amalia</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="starter-page.html">Starter Page</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#resume">Resume</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div class="header-social-links">
+        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
+        <a href="https://www.linkedin.com/in/salsa-ainun-amalia8/" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="breadcrumbs">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html#portfolio">Category</a></li>
+            <li class="breadcrumb-item active current">Portfolio Details</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="title-wrapper">
+        <h1>Project Details</h1>
+        <p>To support the CRM team's needs in querying transactional data via SQL and Metabase, the transaction_amura table was normalized into two separate tables: transactions and product_sales. This restructuring was aimed at simplifying the data model, enabling easier joins, and improving query performance for the data analyst workflow.</p>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 g-lg-5">
+          <div class="col-lg-6">
+           <a href="https://ik.imagekit.io/r6talylrh/transactions-amr?updatedAt=1752114787177" class="glightbox">
+              <img src="https://ik.imagekit.io/r6talylrh/transactions-amr?updatedAt=1752114787177" class="img-fluid mb-4" alt="">
+              </a>
+              <p>
+                <b>Desc: </b><i>This table initially served as the main transactional dataset used by the CRM team. It contains mixed data including transaction details, product info, and customer-related fields—all in a single wide table.</i>
+              </p>
+            <p>
+              <i><b>Purpose:</b>It was the raw table used for storing all transaction-related data but lacked structure for scalable querying and maintenance.</i>
+            </p>
+          <a href="https://ik.imagekit.io/r6talylrh/transactions-2NF?updatedAt=1752114787081" class="glightbox">
+              <img src="https://ik.imagekit.io/r6talylrh/transactions-2NF?updatedAt=1752114787081" class="img-fluid mb-4" alt="">
+              </a>
+              <p>
+                <b>Desc: </b><i>This table was created to isolate the core transactional information such as transaction_id, timestamps, brand ID, channel, customer identifiers, and price.</i>
+              </p>
+              <p>
+                <i><b>Purpose:</b> Acts as the main table representing each unique transaction. Makes it easier for data analysts to focus on transaction-level queries without product-level noise.</i>
+              </p>
+            <a href=https://ik.imagekit.io/r6talylrh/product-sales2NF?updatedAt=1752114787092" class="glightbox">
+              <img src="https://ik.imagekit.io/r6talylrh/product-sales2NF?updatedAt=1752114787092" class="img-fluid mb-4" alt="">
+              </a>
+              <p>
+                <b>Desc: </b><i>This table stores product-level information related to each transaction, such as product ID and quantity, with a reference to the transaction_id.</i>
+              </p>
+              <p>
+                <i><b>Purpose:</b> Separates product sales data for each transaction, allowing one-to-many relationships between a transaction and the products involved—essential for detailed sales reporting and aggregation.</i>
+              </p>
+          </div>
+
+          <div class="col-lg-6">
+
+            <div class="position-sticky" style="top: 40px">
+              <div class="portfolio-description">
+                <h2>Project Background</h2></h2>
+                <p>
+                  In the CRM division of my company, the data analyst had just transitioned into a new role, and was starting to work with SQL for the first time—previously relying on Python for data wrangling. Meanwhile, the CRM system was led by a newly assigned manager, and things were still getting structured.
+                </p>
+                <p>
+                  The data analyst needed a clean and reliable schema to support query efficiency, especially for operations like table joins and filtering in Metabase dashboards. That's when I stepped in.
+                </p>
+                <h2>My Role</h2>
+                <p>
+                 As a Database Administrator, I was responsible for improving data structure through normalization. I worked directly with the CRM team to review their raw transactional data, which was initially stored in a single master table: transaction_amura. After evaluating the schema, I designed and implemented a more normalized version of the database—breaking it into two separate but relationally structured tables: transactions and product_sales.
+                </p>
+               <h2>What i did?</h2>
+                    <ul>
+                    <li><strong>Analyzed</strong> the original schema to identify repeating groups and redundant columns</li>
+                    <li><strong>Normalized</strong> the data up to the <b>Second Normal Form (2NF)</b> to eliminate data duplication</li>
+                    <li><strong>Created primary keys and foreign keys</strong> for proper relational mapping</li>
+                    <li><strong>Improved readability and usability</strong> for analysts by optimizing table relationships</li>
+                    <li><strong>Maintained data integrity</strong> while restructuring</li>
+                    <li><strong>Supported analyst workflows</strong> by ensuring easier joins and cleaner querying</li>
+                  </ul>
+                <h2>Outcome</h2>
+                <p>This restructuring helped the CRM data analyst access necessary fields for analysis faster and more intuitively. With a well-structured schema, their SQL learning process became smoother, and the dashboards in Metabase loaded more efficiently. This also laid the groundwork for more scalable reporting in the CRM team moving forward.</p>
+                <h2>Key Skills Applied</h2>
+                <ul>
+                <li>Database Normalization (1NF → 2NF)</li>
+                <li>Schema Design</li>
+                <li>SQL (DDL/DML)</li>
+                <li>Stakeholder Communication</li>
+                <li>Performance-aware Structuring</li>
+                <li>Cross-team collaboration with CRM & Data Analyst</li>
+                </ul>
+        
+                <h2>Takeaway</h2>
+                <p>
+                  <i>"Good data isn’t just about having a lot of it. It’s about making sure it’s structured, accessible, and scalable."</i>
+                </p>
+                <p>This project highlighted how behind-the-scenes structuring work can massively impact how smooth things run on the front end, especially when supporting team members new to SQL.</p>
+
+              </div>
+
+              <div class="portfolio-info mt-5">
+                <h3>Project information</h3>
+                <ul>
+                  <li><strong>Category</strong>Data Analysis Support</li>
+                  <li><strong>Tools</strong>MySQL Workbench</li>
+                  <li><strong>Project date</strong>June, 2025</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Details Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">EasyFolio</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
+        <a href="https://www.linkedin.com/in/salsa-ainun-amalia8/" target="_blank" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
