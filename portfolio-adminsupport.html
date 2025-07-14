@@ -147,59 +147,61 @@
 
             <div class="position-sticky" style="top: 40px">
               <div class="portfolio-description">
-                <h2>Order Data Cleanup & Optimization in ERP (Perpack)</h2>
+                <h2>Reseller Sales Data Management (Ongoing Operational Task)</h2>
                 <p>
-                  In this project, I simulated a real-world scenario I encountered during my time as a Database Administrator at a skincare retail company. The problem? SKU inconsistencies across multiple systems made it difficult to track product transactions properly — especially when identifying pending orders. Some systems still used old SKUs, some used new SKUs, and some used both. This caused chaos when analyzing transaction data or trying to match product movement. So I built a solution using a SKU mapping table that unified the SKU logic and helped me clean and align the data.
+                  This ongoing task involves managing transactional data for B2B resellers, including price changes, order revisions, new product entries, and record cleanup. I primarily work through phpMyAdmin, executing structured SQL queries to ensure that all updates are accurately reflected in the system and that data integrity is maintained across related tables. These actions are typically triggered by requests from the admin team or reseller-facing divisions, often in time sensitive scenarios where incorrect data could impact billing, delivery, or customer satisfaction.
                 </p>
-                <h2>The Data Structure</h2>
+                <h2>Data Types Commonly Managed</h2>
                 <p>
-                  I worked with three main tables:
+                  The most frequent types of data I update or maintain include:
                 </p>
                 <ul>
                   <li>
-                    <strong>products</strong> – the product catalog with all active SKUs
+                    <strong>Product Pricing Adjustments </strong>— price corrections for SKUs requested by admin or pricing teams
                   </li>
                   <li>
-                    <strong>transactions</strong> – a list of sales and pending orders (some using old SKUs)
+                    <strong>Order Modifications </strong>— changes to quantity, item replacement, or cancellations due to stock or request errors
                   </li>
                   <li>
-                    <strong>sku_mapping</strong> – the key to everything! It contains:
-                    <ul>
-                      <li><strong>sku:</strong> can be either the old or new SKU</li>
-                      <li><strong>desc:</strong> explains whether the SKU is an "old" or "new" one</li>
-                      <li><strong>new_sku:</strong> the standardized SKU that we want everything to align with</li>
-                    </ul>
+                    <strong>New Product Entries </strong>— inserting new SKUs with initial pricing and status
+                  </li>
+                   <li>
+                    <strong>Transaction Cleanups </strong>— removing duplicate or invalid records based on verified approval
+                  </li>
+                  <li>
+                    <strong>Status Updates </strong>— flagging orders as completed, failed, or refunded
                   </li>
                 </ul>
-                <h2>My Role in the Process</h2>
-                <p>
-                  As a DBA, i designed the flow so every incoming transaction (regardless of SKU version) could be translated into a standardized SKU, using the mapping table as the translator. Once all SKUs were normalized, I ran checks to find orders that were still in "pending" status but had valid, active SKUs in the product master. This helped other teams (like fulfillment and ops) take action quickly.
-                </p>
-                <h2>Why This Matters</h2>
-                                  <p>
-                    A pending order might seem small, but when you're dealing with hundreds or thousands per day — and SKUs don't match — it's a nightmare.
-                  </p>
-                  <p>This approach:</p>
+                <h2>Tools & Workflow</h2>
+                 <ul>
+                   <li><b>phpMyAdmin:</b> Used to run manual SQL operations directly on live data</li>
+                   <li><b>WhatsApp / Internal Ticketing:</b> Admins typically send requests via WhatsApp or chat with specific instructions</li>
+                   <li><b>SQL Queries:</b> UPDATE, INSERT, DELETE, and some simple JOIN checks for data validation</li>
+                   <li><b>Cross-checking:</b> Double-checked against product master or CRM data to ensure consistency</li>
+                 </ul>
+                <h2>Impact</h2>
+                  <p>While the queries are relatively simple, the impact is operationally significant:</p>
                   <ul>
-                    <li>Prevented missing or misread orders</li>
-                    <li>Improved data alignment between departments</li>
-                    <li>Enabled faster decision-making (and cleaner dashboards!)</li>
+                    <li>Ensures accurate sales reports</li>
+                    <li>Prevents miscommunication with resellers</li>
+                    <li>Reduces downstream errors in logistics and billing</li>
+                    <li>Maintains trust between teams and systems</li>
                   </ul>
 
                 <h2>Takeaway</h2>
                 <p>
-                  <i>"You can't analyze what you can't align."</i>
+                  <i>"Even the simplest queries carry weight when they impact real transactions."</i>
                 </p>
-                <p>This project taught me that even small inconsistencies like SKU mismatches can ripple into huge operational delays. As a DBA, my job isn’t just keeping the database alive — it’s making sure the data inside it actually makes sense.</p>
+                <p>This task has strengthened my attention to detail and taught me the importance of precision, especially when working with live business data that affects customers, finance, and logistics.</p>
 
               </div>
 
               <div class="portfolio-info mt-5">
                 <h3>Project information</h3>
                 <ul>
-                  <li><strong>Category</strong> Learning & Independent Project</li>
-                  <li><strong>Tools</strong>MySQL Workbench, Excel</li>
-                  <li><strong>Project date</strong> June - July, 2025</li>
+                  <li><strong>Category</strong>Database Management & Optimizations</li>
+                  <li><strong>Tools</strong>phpMyAdmin</li>
+                  <li><strong>Project date</strong> Feb - Present, 2025</li>
                 </ul>
               </div>
             </div>
