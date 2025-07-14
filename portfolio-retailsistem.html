@@ -92,77 +92,105 @@
 
       <div class="container" data-aos="fade-up">
 
-        <div class="row gy-4 g-lg-5">
+         <div class="row gy-4 g-lg-5">
           <div class="col-lg-6">
-           <a href="https://ik.imagekit.io/r6talylrh/ERD-Perpack.jpg?updatedAt=1751505478665" class="glightbox">
-              <img src="https://ik.imagekit.io/r6talylrh/ERD-Perpack.jpg?updatedAt=1751505478665" class="img-fluid mb-4" alt="">
+           <a href="https://ik.imagekit.io/r6talylrh/use-case-KKP.png" class="glightbox">
+              <img src="https://ik.imagekit.io/r6talylrh/use-case-KKP.png" class="img-fluid mb-4" alt="">
               </a>
-              <p><b>Desc: </b><i>A rough draft created to map out the structure and relationships of the orders table. This helped me understand the data flow before refining the design</i></p>
-          <a href="https://ik.imagekit.io/r6talylrh/ERD-Orders.jpg?updatedAt=1751505478745" class="glightbox">
-              <img src="https://ik.imagekit.io/r6talylrh/ERD-Orders.jpg?updatedAt=1751505478745" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>A grouped and color-coded version of the ERD, organized by functional areas—such as transactions, user data, and warehouse info—to support easier analysis and system navigation.</i></p>
-          </div>
+              <p><b>Desc: </b><i>This diagram defines the interaction between users and the system functionalities. Two types of users (Admin and Kepala Subseksi) are granted access to various modules such as managing tenants, rental units, and generating reports. Each use case is linked to a login process to ensure secure access control.</i></p>
 
           <div class="col-lg-6">
+
+            <a href="https://ik.imagekit.io/r6talylrh/activity-diagram-data-pegawai.jpeg?updatedAt=1752458516936" class="glightbox">
+              <img src="https://ik.imagekit.io/r6talylrh/activity-diagram-data-pegawai.jpeg?updatedAt=1752458516936" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>Highlights how an admin interacts with the system to manage employee records. Starting from the menu selection, the diagram shows decision-making points and data flow until the final output is stored or displayed.</i></p>
+          </div>
+
+           <div class="row gy-4 g-lg-5">
+          <div class="col-lg-6">
+           <a href="https://ik.imagekit.io/r6talylrh/sequence-diagram-data-pegawai.jpeg?updatedAt=1752458516949" class="glightbox">
+              <img src="https://ik.imagekit.io/r6talylrh/sequence-diagram-data-pegawai.jpeg?updatedAt=1752458516949" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>The visual flow captures how a user navigates employee data tasks—from choosing the menu to saving and modifying records. The steps clearly map the interaction between interface, logic controller, and database.</i></p>
+            
+          <a href="https://ik.imagekit.io/r6talylrh/class-diagram-KKP.jpeg?updatedAt=1752458516937" class="glightbox">
+              <img src="https://ik.imagekit.io/r6talylrh/class-diagram-KKP.jpeg?updatedAt=1752458516937" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>A modular structure outlines how the application's main components—like tenant data, employee records, and rental transactions—are organized and interact. Each class includes attributes and basic methods to support CRUD operations, ensuring clarity in the system’s architecture.</i></p>
+          </div>
+
+
 
             <div class="position-sticky" style="top: 40px">
               <div class="portfolio-description">
                 <h2>Building an ERD for Analyst Needs (Perpack ERP System)</h2>
                 <p>
-                  This project is based on a real challenge I faced as a Database Administrator in a fast-paced retail environment. Our company had just onboarded a new ERP system called Perpack, which recently extended its capabilities to include sales operations. When the system switched from legacy to Perpack, the Data Analyst team needed access to the sales data structure in order to start building dashboards and reporting pipelines via Metabase.
-                  The issue?
+                  Pasar Jaya Asem Reges is a semi-modern market located in the heart of the city, functioning as a vital economic hub for the local community. With hundreds of shop units (ruko) available for rent, the market supports various traders, from basic necessities to electronics sellers, while also contributing to employment and the local economy.
                 <p/>
-                  <p>There was no existing ERD (Entity Relationship Diagram) provided, and internal constraints made it impossible to request one directly from the ERP developers. o I stepped in, and did what any problem-solving DBA would do.
+                <p>
+                    However, rental management at the market was still conducted manually. This included tenant data recording, rent payment scheduling, and lease documentation—mostly handled through physical books and paper documents.
                 </p>
+                <p>This manual system led to several issues:</p>
+                <ul>
+                  <li>Frequent data entry errors</li>
+                  <li>Delayed information processing</li>
+                  <li>Difficulty accessing critical data quickly</li>
+                  <li>Lack of integration and operational inefficiency</li>
+                </ul>
+                <p>
+                  All of these contributed to reduced satisfaction for tenants and slowed down the market's administration process.
+                </p>
+
+                <h2>Objective</h2>
+                <p>
+                  To address these challenges, I designed a rental management information system aimed at automating shop rental operations at Pasar Jaya Asem Reges. The system was intended to:
+                </p>
+                <ul>
+                  <li>Digitize tenant registration and lease contracts</li>
+                  <li>Track payment status and rental periods</li>
+                  <li>Improve data accuracy and access</li>
+                  <li>Speed up administrative workflows</li>
+                </ul>
+                <p>In the end, the project aimed to support a more effective and efficient market management process—laying the foundation for digital transformation in a traditional environment.</p>
+                
                 <h2>My Role</h2>
                 <p>
-                 Although this wasn’t part of my original job description, I took the initiative to:
+                In this internship project, I was responsible for several core components of the system development:
                 </p>
-                <ol>
-                  <li>Coordinate with the Data Analyst to understand the core tables they needed (primarily orders)</li>
-                  <li>Analyze the orders table, which contained nearly 100 columns, to identify:
                 <ul>
-                  <li>Primary foreign keys</li>
-                  <li>Relevant entities connected to the order workflow</li>
+                  <li>Designing the database structure, including table relationships and data normalization</li>
+                  <li>Creating UI mockups that reflect user needs and process flow</li>
+                  <li>Modeling system architecture using UML diagrams such as use case, activity, and class diagrams</li>
+                  <li>Collaborating with a team of 7 to compile the final project report, ensuring technical clarity and proper documentation</li>
                 </ul>
-                  </li>
-                  <li>Bridge communication between Sales leadership and ERP dev team (since our direct leader didn’t support the request)</li>
-                  <li>Build a custom ERD to visualize the data flow clearly for analytics purposes</li>
-                </ol>
-                  </li>
-                </ul>
-                <h2>ERD Structure I Designed</h2>
-                <p>I categorized the entire data flow into three main pillars:</p>
-                  <ul>
-                    <li><strong>Sales & Transactional Info</strong> – anything related to the order lifecycle</li>
-                    <li><strong>User Entities</strong> – identifying who’s involved (e.g., admin, customers, the role)</li>
-                    <li><strong>Warehouse Locations</strong> – linking order flows to physical stock and shipping routes</li>
-                  </ul>
-                  <p>From just one main table (orders), I reverse-engineered all its foreign key connections and mapped out related tables to clarify how the sales data flows across the ERP.</p>
-
-                <h2>Results</h2>
-                <ul>
-                <li>Built a fully usable ERD for the orders module</li>
-                <li>Helped the Data Analyst start querying cleanly for Metabase dashboarding</li>
-                <li>Reduced dependency on ERP vendor for future table clarification</li>
-                <li>Positioned myself as a go-to for internal data infrastructure questions</li>
-                </ul>
+                <p>
+                  Through this role, I gained experience in aligning technical design with real business requirements and contributing to a structured team-based development process.
+                </p>
+                
+                <h2>Chalenge & solutions</h2>
+                <p>
+                  During our internship project, my team of seven had to navigate differences in technical capabilities, task delegation, and time management while working on a real client case. I was responsible for designing the database structure, building the UI layout, creating UML diagrams, and contributing to the final report alongside my teammates.
+                </p>
+                <p>
+                  One of the main challenges was adapting our academic knowledge to real-world conditions. Since the market's operations were still managed manually, we had to gather information directly from staff and adjust our system design accordingly. This process helped us build a solution that was both functional and relevant to the company's workflow.
+                </p>
         
                 <h2>Takeaway</h2>
                 <p>
-                  <i>"Sometimes, being a DBA isn’t about writing SQL, it’s also about seeing the gap, asking the right questions, and building the thing that no one else will."</i>
+                  <i>"This project helped me see how even the most manual systems can be improved with structured thinking, good design, and teamwork."</i>
                 </p>
-                <p>This project reminded me that solid data systems only happen when we put collaboration first, even when support doesn’t come from where we expect.</p>
+                <p>It was also a valuable experience in translating real-world operational problems into a working digital solution—while learning how to document and communicate those ideas clearly across a team.</p>
 
               </div>
 
               <div class="portfolio-info mt-5">
                 <h3>Project information</h3>
                 <ul>
-                  <li><strong>Category</strong>Data Analysis Support</li>
-                  <li><strong>Tools</strong>Draw.io, Metabase</li>
-                  <li><strong>Project date</strong> June, 2025</li>
+                  <li><strong>Category</strong>System Design & Analysis</li>
+                  <li><strong>Tools</strong>Netbeans, Draw.io, Javascript, phpMyAdmin</li>
+                  <li><strong>Project URL</strong> <a href="https://ik.imagekit.io/r6talylrh/project-details-KKP.pdf?updatedAt=1752458517673" target="_blank">See the project here</a></li>
+                  <li><strong>Project date</strong>March - Aug, 2024</li>
                 </ul>
               </div>
             </div>
