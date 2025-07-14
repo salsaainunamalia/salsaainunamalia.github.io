@@ -82,7 +82,7 @@
 
       <div class="title-wrapper">
         <h1>Project Details</h1>
-        <p>After identifying several issues related to SKU mismatches on Sinergi's ERP system, I decided to take a hands-on approach to understand and resolve the problem.</p>
+        <p>As the DBA at Sinergi Group, I’m responsible for maintaining data accuracy and system consistency across reseller transactions. This includes handling operational queries requested by the reseller team and internal admins, such as updating product prices, correcting orders, and removing invalid transactions.</p>
       </div>
     </div><!-- End Page Title -->
 
@@ -93,43 +93,56 @@
 
         <div class="row gy-4 g-lg-5">
         <div class="col-lg-6">
-              <a href="https://ik.imagekit.io/r6talylrh/order-pending?updatedAt=1751438086590" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/order-pending?updatedAt=1751438086590" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Initial dashboard shows 3000++ pending sales orders, indicating potential data mismatches.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Extracted dummy transaction data to investigate SKU inconsistencies across platforms.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Used dummy product master data to match SKU codes with product names and variations.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/sku-mapping2" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/sku-mapping2" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Created a dummy mapping table to standardize old SKUs (ID-xxx) into new SKUs (SKU-xxx) for consistent reporting and analytics.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Designed a simplified ERD focused only on the core tables involved in the SKU inconsistency issue.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Queried unmatched dummy SKUs that are missing in the SKU mapping table, identifying root causes of failed order sync.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Applied COALESCE() to merge old and new dummy SKUs, creating a consistent final SKU reference.</i></p>
-            </div>
 
-
+          <a href="https://ik.imagekit.io/r6talylrh/request-update.png" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/request-update.png" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i> These are real examples of incoming admin requests for database modifications. Each request is reviewed, translated into SQL queries, and executed via phpMyAdmin to ensure accurate record updates.</i></p>
+          
+              <pre><code>
+                UPDATE penjualan
+                SET alamat_id = (
+                    SELECT id
+                    FROM alamat_agen
+                    WHERE nama = 'Agen Baru Selatan'
+                )
+                WHERE id = 1005;
+              </code></pre>
+              <p><b>Desc: </b><i>Simulated SQL query to update the alamat_id in the penjualan table using a subquery. This reflects a real-world task I’ve handled as a DBA, where address corrections must reference the valid ID from the alamat_agen table to ensure relational integrity.</i></p>
+            
+              <pre><code>
+                UPDATE produk
+                SET harga_produk = 25700
+                WHERE id = 24;
+              </code></pre>
+              <p><b>Desc: </b><i>Simulated SQL query to update the product price in the produk table. This example reflects a typical task I handle as a DBA—ensuring price accuracy through controlled updates, often based on requests from reseller admins or supervisors.</i></p>
+            
+              <pre><code>
+                UPDATE penjualan
+                SET qty = 500,
+                    harga_produk = (
+                        SELECT harga_produk
+                        FROM produk
+                        WHERE nama_produk = 'Pouch Amura'
+                    )
+                WHERE id = 17;
+              </code></pre>
+              <p><b>Desc: </b><i>Simulated SQL query to update the transaction quantity and dynamically adjust the product price using a subquery. This reflects a request-driven task where the product ID is unknown, and the correct price is fetched from the produk table based on the product name—ensuring both transactional accuracy and data integrity.</i></p>
+            
+              <pre><code>
+                INSERT INTO product (id, nama_produk, harga_jual, stock, brand, public)
+                VALUES (6, 'Pouch Reglow', 0, 1000, 'Reglow', TRUE);
+              </code></pre>
+              <p><b>Desc: </b><i>SQL query to insert a newly launched product into the product table, including its name, price, stock quantity, brand, and publication status. This reflects the daily operational tasks I handle as a DBA, ensuring product entries are accurate, structured, and ready for live deployment.</i></p>
+            
+              <pre><code>
+                UPDATE transaksi
+                SET produk_id = 21, nama_produk = 'Pouch Purela'
+                WHERE id = 1012;
+              </code></pre>
+              <p><b>Desc: </b><i>SQL query to correct a misentered product name and ID in a reseller transaction. This reflects a real scenario where an admin mistakenly swapped values during manual input, and I was tasked with safely updating the record to maintain transactional integrity.</i></p>
+                                   
+              
           <div class="col-lg-6">
 
             <div class="position-sticky" style="top: 40px">
