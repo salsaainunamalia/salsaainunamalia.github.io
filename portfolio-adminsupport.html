@@ -99,14 +99,13 @@
               </a>
               <p><b>Desc: </b><i> These are real examples of incoming admin requests for database modifications. Each request is reviewed, translated into SQL queries, and executed via phpMyAdmin to ensure accurate record updates.</i></p>
           
-              <pre><code>
-                UPDATE penjualan
-                SET alamat_id = (
-                    SELECT id
-                    FROM alamat_agen
-                    WHERE nama = 'Agen Baru Selatan'
-                )
-                WHERE id = 1005;
+              <pre><code>UPDATE penjuala
+SET alamat_id = (
+SELECT id
+FROM alamat_agen
+WHERE nama = 'Agen Baru Selatan'
+)
+WHERE id = 1005;
               </code></pre>
               <p><b>Desc: </b><i>Simulated SQL query to update the alamat_id in the penjualan table using a subquery. This reflects a real-world task I’ve handled as a DBA, where address corrections must reference the valid ID from the alamat_agen table to ensure relational integrity.</i></p>
             
