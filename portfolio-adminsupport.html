@@ -110,25 +110,26 @@
                 <img src="https://ik.imagekit.io/r6talylrh/request-update.png" class="img-fluid mb-4" alt="">
               </a>
               <p><b>Desc: </b><i> These are real examples of incoming admin requests for database modifications. Each request is reviewed, translated into SQL queries, and executed via phpMyAdmin to ensure accurate record updates.</i></p>
-          
-              <pre><code>UPDATE penjualan
+             <section class="project-sql-example">
+        <pre><code class="language-sql">UPDATE penjualan
 SET alamat_id = (
-SELECT id
-FROM alamat_agen
-WHERE nama = 'Agen Baru Selatan'
+  SELECT id
+  FROM alamat_agen
+  WHERE nama = 'Agen Baru Selatan'
 )
-WHERE id = 1005;
-              </code></pre>
+WHERE id = 1005;</code></pre>
               <p><b>Desc: </b><i>Simulated SQL query to update the alamat_id in the penjualan table using a subquery. This reflects a real-world task I’ve handled as a DBA, where address corrections must reference the valid ID from the alamat_agen table to ensure relational integrity.</i></p>
             
-              <pre><code>
+              <section class="project-sql-example">
+              <pre><code class="language-sql">
                 UPDATE produk
                 SET harga_produk = 25700
                 WHERE id = 24;
               </code></pre>
               <p><b>Desc: </b><i>Simulated SQL query to update the product price in the produk table. This example reflects a typical task I handle as a DBA—ensuring price accuracy through controlled updates, often based on requests from reseller admins or supervisors.</i></p>
             
-              <pre><code>UPDATE penjualan
+              <section class="project-sql-example">
+              <pre><code class="language-sql">UPDATE penjualan
                 SET qty = 500,
                     harga_produk = (
                         SELECT harga_produk
@@ -139,13 +140,15 @@ WHERE id = 1005;
               </code></pre>
               <p><b>Desc: </b><i>Simulated SQL query to update the transaction quantity and dynamically adjust the product price using a subquery. This reflects a request-driven task where the product ID is unknown, and the correct price is fetched from the produk table based on the product name—ensuring both transactional accuracy and data integrity.</i></p>
             
-              <pre><code>
+              <section class="project-sql-example">
+              <pre><code class="language-sql">
                 INSERT INTO product (id, nama_produk, harga_jual, stock, brand, public)
                 VALUES (6, 'Pouch Reglow', 0, 1000, 'Reglow', TRUE);
               </code></pre>
               <p><b>Desc: </b><i>SQL query to insert a newly launched product into the product table, including its name, price, stock quantity, brand, and publication status. This reflects the daily operational tasks I handle as a DBA, ensuring product entries are accurate, structured, and ready for live deployment.</i></p>
             
-              <pre><code>
+             <section class="project-sql-example">
+              <pre><code class="language-sql">
                 UPDATE transaksi
                 SET produk_id = 21, nama_produk = 'Pouch Purela'
                 WHERE id = 1012;
