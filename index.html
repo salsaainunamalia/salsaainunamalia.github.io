@@ -648,7 +648,7 @@
                       Fast, reliable, and great to work with
                     </h2>
                     <p>
-                      Honestly, I'm really happy I get to frequently collaborate with Salsa. She's been incredibly helpful with my work, especially when things needed to move quickly like updating the core system. She's super responsive and easy to communicate with. So far, I’ve really enjoyed working with Salsa
+                      I'm really happy I get to frequently collaborate with Salsa. She's been incredibly helpful with my work, especially when things needed to move quickly like updating the core system for reseller transactions. She's super responsive and easy to communicate with. So far, I’ve really enjoyed working with Salsa
                     
                     
                     
@@ -762,38 +762,7 @@
       </div>
 
     </section><!-- /Contact Section -->
-    <script>
-      const form = document.getElementById('myForm');
-      const loading = document.querySelector('.loading');
-      const success = document.querySelector('.sent-message');
-      const error = document.querySelector('.error-message');
-    
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        loading.style.display = 'block';
-        success.style.display = 'none';
-        error.style.display = 'none';
-    
-        fetch(form.action, {
-          method: 'POST',
-          body: new FormData(form),
-          headers: {
-            'Accept': 'application/json'
-          }
-        }).then(response => {
-          loading.style.display = 'none';
-          if (response.ok) {
-            success.style.display = 'block';
-            form.reset();
-          } else {
-            error.style.display = 'block';
-          }
-        }).catch(() => {
-          loading.style.display = 'none';
-          error.style.display = 'block';
-        });
-      });
-    </script>
+   
   </main>
 
   <footer id="footer" class="footer">
