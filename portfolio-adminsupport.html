@@ -117,8 +117,7 @@
               </code></pre>
               <p><b>Desc: </b><i>Simulated SQL query to update the product price in the produk table. This example reflects a typical task I handle as a DBA—ensuring price accuracy through controlled updates, often based on requests from reseller admins or supervisors.</i></p>
             
-              <pre><code>
-                UPDATE penjualan
+              <pre><code>UPDATE penjualan
                 SET qty = 500,
                     harga_produk = (
                         SELECT harga_produk
