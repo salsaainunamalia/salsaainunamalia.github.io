@@ -113,7 +113,7 @@
           
         <h3>TRIGGER AFTER UPDATE</h3>
           <p>
-          b>Desc: </b>
+          <b>Desc: </b>
           <i>
             To ensure that any updates made to the transaction_amura table are consistently reflected in the related transactions and product_sales tables. This helps maintain data integrity across multiple tables connected to the same transaction.
           </i>
@@ -183,14 +183,68 @@ BEGIN
 
 END
          </code></pre>
+              <h3>TRIGGER AFTER INSERT</h3>  
               <section class="project-sql-example">
-              <pre><code class="language-sql">UPDATE produk
-SET harga_produk = 25700
-WHERE id = 24;
+              <pre><code class="language-sql">CREATE TRIGGER trg_after_insert_transaction_amura
+AFTER INSERT ON transaction_amura
+FOR EACH ROW
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM transactions WHERE transaction_id = NEW.transaction_id
+  ) THEN
+    INSERT INTO transactions (
+      transaction_id,
+      created_at,
+      updated_at,
+      id_brand,
+      channel,
+      channel_type,
+      user_id,
+      user_name,
+      receive_name,
+      handphone_number,
+      address,
+      `desc`,
+      cs_name,
+      price
+    )
+    VALUES (
+      NEW.transaction_id,
+      NEW.created_at,
+      NEW.updated_at,
+      NEW.id_brand,
+      NEW.channel,
+      NEW.channel_type,
+      NEW.user_id,
+      NEW.user_name,
+      NEW.receive_name,
+      NEW.handphone_number,
+      NEW.address,
+      NEW.`desc`,
+      NEW.cs_name,
+      NEW.price
+    );
+
+    INSERT INTO product_sales (
+      created_at,
+      transaction_id,
+      id_brand,
+      product,
+      qty
+    )
+    VALUES (
+      NEW.created_at,
+      NEW.transaction_id,
+      NEW.id_brand,
+      NEW.product,
+      NEW.qty
+    );
+  END IF;
+END
               </code></pre>
               <p><b>Desc: </b><i>Simulated SQL query to update the product price in the produk table. This example reflects a typical task I handle as a DBA—ensuring price accuracy through controlled updates, often based on requests from reseller admins or supervisors.</i></p>
             
-              <h3>TRIGGER AFTER INSERT</h3>
+            
               <section class="project-sql-example">
               <pre><code class="language-sql">UPDATE penjualan
 SET qty = 500,
