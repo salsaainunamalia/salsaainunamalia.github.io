@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Portfolio Details</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+
+  <style>
+  pre[class*="language-"] {
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 14px;
+  }
+  
+    .text-left {
+      text-align: left;
+    }
+  </style>
+
+   <!-- Prism Highlight CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: EasyFolio
+  * Template URL: https://bootstrapmade.com/easyfolio-bootstrap-portfolio-template/
+  * Updated: Feb 21 2025 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <h1 class="sitename">Salsa Ainun Amalia</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+       <ul>
+         <li><a href="starter-page.html">Starter Page</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#resume">Resume</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div class="header-social-links">
+        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
+        <a href="https://www.linkedin.com/in/salsa-ainun-amalia8/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="breadcrumbs">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html#portfolio">Category</a></li>
+            <li class="breadcrumb-item active current">Portfolio Details</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="title-wrapper">
+        <h1>Project Details</h1>
+        <p>In this project, I was responsible for ensuring data consistency and integrity across multiple related tables within a MySQL database. The goal was to automate the synchronization of records between tables upon various data operations such as insert, update, and delete. To achieve this, I implemented a series of SQL triggers tailored to the business logic and performance considerations of the transactional data flow.</p>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 g-lg-5">
+        <div class="col-lg-6">
+          
+        <h3>TRIGGER AFTER UPDATE</h3>
+          <p>
+          b>Desc: </b>
+          <i>
+            To ensure that any updates made to the transaction_amura table are consistently reflected in the related transactions and product_sales tables. This helps maintain data integrity across multiple tables connected to the same transaction.
+          </i>
+        </p>
+        <p>
+          Trigger Logic:
+          <i>
+            <ol>
+              <li>
+                The first updates general transaction metadata (created_at, updated_at, channel, cs_name, etc.) in the transactions table.
+              </li>
+              <li>
+                The second updates product-related information (product, qty) in the product_sales table.
+              </li>
+            </ol>
+          </i>
+        </p>
+          
+          <pre><code class="language-sql">CREATE TRIGGER trg_update_after_amura
+AFTER UPDATE ON transaction_amura
+FOR EACH ROW
+BEGIN
+  UPDATE transactions t
+  JOIN (
+    SELECT 
+      transaction_id,
+      created_at,
+      updated_at,
+      id_brand,
+      channel,
+      channel_type,
+      user_id,
+      `desc`,
+      cs_name,
+      price
+    FROM transaction_amura
+    WHERE transaction_id = NEW.transaction_id
+    ORDER BY id ASC
+    LIMIT 1
+  ) temp ON t.transaction_id = temp.transaction_id
+  SET 
+    t.created_at = temp.created_at,
+    t.updated_at = temp.updated_at,
+    t.id_brand = temp.id_brand,
+    t.channel = temp.channel,
+    t.channel_type = temp.channel_type,
+    t.user_id = temp.user_id,
+    t.`desc` = temp.`desc`,
+    t.cs_name = temp.cs_name,
+    t.price = temp.price;
+
+
+  UPDATE product_sales ps
+  JOIN (
+    SELECT 
+      transaction_id,
+      product,
+      qty
+    FROM transaction_amura
+    WHERE transaction_id = NEW.transaction_id
+    ORDER BY id ASC
+    LIMIT 1
+  ) temp_ps ON ps.transaction_id = temp_ps.transaction_id
+  SET 
+    ps.product = temp_ps.product,
+    ps.qty = temp_ps.qty;
+
+END
+         </code></pre>
+              <section class="project-sql-example">
+              <pre><code class="language-sql">UPDATE produk
+SET harga_produk = 25700
+WHERE id = 24;
+              </code></pre>
+              <p><b>Desc: </b><i>Simulated SQL query to update the product price in the produk table. This example reflects a typical task I handle as a DBA—ensuring price accuracy through controlled updates, often based on requests from reseller admins or supervisors.</i></p>
+            
+              <h3>TRIGGER AFTER INSERT</h3>
+              <section class="project-sql-example">
+              <pre><code class="language-sql">UPDATE penjualan
+SET qty = 500,
+harga_produk = (
+  SELECT harga_produk
+  FROM produk
+  WHERE nama_produk = 'Pouch Amura'
+)
+WHERE id = 17;
+              </code></pre>
+              <p><b>Desc: </b><i>Simulated SQL query to update the transaction quantity and dynamically adjust the product price using a subquery. This reflects a request-driven task where the product ID is unknown, and the correct price is fetched from the produk table based on the product name—ensuring both transactional accuracy and data integrity.</i></p>
+            
+              <section class="project-sql-example">
+              <pre><code class="language-sql">INSERT INTO product (id, nama_produk, harga_jual, stock, brand, public)
+VALUES (6, 'Pouch Reglow', 0, 1000, 'Reglow', TRUE);
+              </code></pre>
+              <p><b>Desc: </b><i>SQL query to insert a newly launched product into the product table, including its name, price, stock quantity, brand, and publication status. This reflects the daily operational tasks I handle as a DBA, ensuring product entries are accurate, structured, and ready for live deployment.</i></p>
+            
+             <section class="project-sql-example">
+              <pre><code class="language-sql">UPDATE transaksi
+SET produk_id = 21, nama_produk = 'Pouch Purela'
+WHERE id = 1012;
+              </code></pre>
+              <p><b>Desc: </b><i>SQL query to correct a misentered product name and ID in a reseller transaction. This reflects a real scenario where an admin mistakenly swapped values during manual input, and I was tasked with safely updating the record to maintain transactional integrity.</i></p>
+        </div>                  
+              
+          <div class="col-lg-6">
+
+            <div class="position-sticky" style="top: 40px">
+              <div class="portfolio-description">
+                <h2>Reseller Sales Data Management (Ongoing Operational Task)</h2>
+                <p>
+                  This ongoing task involves managing transactional data for B2B resellers, including price changes, order revisions, new product entries, and record cleanup. I primarily work through phpMyAdmin, executing structured SQL queries to ensure that all updates are accurately reflected in the system and that data integrity is maintained across related tables. These actions are typically triggered by requests from the admin team or reseller-facing divisions, often in time sensitive scenarios where incorrect data could impact billing, delivery, or customer satisfaction.
+                </p>
+                <h2>Data Types Commonly Managed</h2>
+                <p>
+                  The most frequent types of data I update or maintain include:
+                </p>
+                <ul>
+                  <li>
+                    <strong>Product Pricing Adjustments </strong>— price corrections for SKUs requested by admin or pricing teams
+                  </li>
+                  <li>
+                    <strong>Order Modifications </strong>— changes to quantity, item replacement, or cancellations due to stock or request errors
+                  </li>
+                  <li>
+                    <strong>New Product Entries </strong>— inserting new SKUs with initial pricing and status
+                  </li>
+                   <li>
+                    <strong>Transaction Cleanups </strong>— removing duplicate or invalid records based on verified approval
+                  </li>
+                  <li>
+                    <strong>Status Updates </strong>— flagging orders as completed, failed, or refunded
+                  </li>
+                </ul>
+                <h2>Tools & Workflow</h2>
+                 <ul>
+                   <li><b>phpMyAdmin:</b> Used to run manual SQL operations directly on live data</li>
+                   <li><b>WhatsApp / Internal Ticketing:</b> Admins typically send requests via WhatsApp or chat with specific instructions</li>
+                   <li><b>SQL Queries:</b> UPDATE, INSERT, DELETE, and some simple JOIN checks for data validation</li>
+                   <li><b>Cross-checking:</b> Double-checked against product master or CRM data to ensure consistency</li>
+                 </ul>
+                <h2>Impact</h2>
+                  <p>While the queries are relatively simple, the impact is operationally significant:</p>
+                  <ul>
+                    <li>Ensures accurate sales reports</li>
+                    <li>Prevents miscommunication with resellers</li>
+                    <li>Reduces downstream errors in logistics and billing</li>
+                    <li>Maintains trust between teams and systems</li>
+                  </ul>
+
+                  <div class="testimonial-item">
+                  <p>
+                    <i class="bi bi-quote quote-icon-left"></i>
+                    <span>She's been incredibly helpful with my work, especially when things needed to move quickly like updating the core system. She's super responsive and easy to communicate with. So far, I’ve really enjoyed working with Salsa.</span>
+                    <i class="bi bi-quote quote-icon-right"></i>
+                  </p>
+                  <div>
+                    <img src="https://ik.imagekit.io/r6talylrh/Pupu-Oktavia.jpg?updatedAt=1752486432639" class="testimonial-img" alt="">
+                    <h3>Pupu Oktavia</h3>
+                    <h4>Sales Administration</h4>
+                  </div>
+                </div>
+                
+                <h2 class="text-left">Takeaway</h2>
+                <p>
+                  <i>"Even the simplest queries carry weight when they impact real transactions."</i>
+                </p>
+                <p>This task has strengthened my attention to detail and taught me the importance of precision, especially when working with live business data that affects customers, finance, and logistics.</p>
+
+              </div>
+
+              <div class="portfolio-info mt-5">
+                <h3>Project information</h3>
+                <ul>
+                  <li><strong>Category</strong>Database Management & Optimizations</li>
+                  <li><strong>Tools</strong>phpMyAdmin</li>
+                  <li><strong>Project date</strong> Feb - Present, 2025</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        
+
+    </section><!-- /Portfolio Details Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">EasyFolio</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
+        <a href="https://www.linkedin.com/in/salsa-ainun-amalia8/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Prism Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+<!-- Komponen SQL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
+<!-- Plugin Toolbar (label bahasa) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+
+</body>
+
+</html>
