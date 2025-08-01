@@ -180,17 +180,17 @@ END
               <h3>TRIGGER AFTER INSERT</h3>
               <p>
                 Trigger Logic:
-                <li>
-                  <i><ol>
+                  <ol>
+                    <i>
                     <ul>When a new row is inserted into transaction_amura, the system checks if the transaction_id doesn't already exist in the transactions table.</ul>
                     <ul>If the ID is new:</ul>
                         <ol>
                           <li>The transaction data is copied into the transactions table (main transaction data).</li>
                           <li>The first product from the transaction is copied into the product_sales table.</li>
                         </ol>
+                      </i>
                   </ol>
-                  </i>
-                </li>
+               </li>
               </p>
               <section class="project-sql-example">
               <pre><code class="language-sql">CREATE TRIGGER trg_after_insert_transaction_amura
@@ -250,34 +250,30 @@ BEGIN
   END IF;
 END
               </code></pre>
-              
-            
-            
+
+              <h3>TRIGGER AFTER DELETE</h3>
+                <p>Trigger Logic:</p>
+                <i>
+                <p>
+                  When a row is deleted from transaction_amura, the system will:
+                  <ol>
+                    <li>Delete the corresponding transaction from the transactions table using the same transaction_id.</li>
+                    <li>Delete related product data from the product_sales table using the same transaction_id.</li>
+                  </ol>
+                </p>
+                </i> 
               <section class="project-sql-example">
-              <pre><code class="language-sql">UPDATE penjualan
-SET qty = 500,
-harga_produk = (
-  SELECT harga_produk
-  FROM produk
-  WHERE nama_produk = 'Pouch Amura'
-)
-WHERE id = 17;
-              </code></pre>
-              <p><b>Desc: </b><i>Simulated SQL query to update the transaction quantity and dynamically adjust the product price using a subquery. This reflects a request-driven task where the product ID is unknown, and the correct price is fetched from the produk table based on the product name—ensuring both transactional accuracy and data integrity.</i></p>
-            
-              <section class="project-sql-example">
-              <pre><code class="language-sql">INSERT INTO product (id, nama_produk, harga_jual, stock, brand, public)
-VALUES (6, 'Pouch Reglow', 0, 1000, 'Reglow', TRUE);
-              </code></pre>
-              <p><b>Desc: </b><i>SQL query to insert a newly launched product into the product table, including its name, price, stock quantity, brand, and publication status. This reflects the daily operational tasks I handle as a DBA, ensuring product entries are accurate, structured, and ready for live deployment.</i></p>
-            
-             <section class="project-sql-example">
-              <pre><code class="language-sql">UPDATE transaksi
-SET produk_id = 21, nama_produk = 'Pouch Purela'
-WHERE id = 1012;
-              </code></pre>
-              <p><b>Desc: </b><i>SQL query to correct a misentered product name and ID in a reseller transaction. This reflects a real scenario where an admin mistakenly swapped values during manual input, and I was tasked with safely updating the record to maintain transactional integrity.</i></p>
-        </div>                  
+              <pre><code class="language-sql">CREATE trg_after_delete_transaction_amura
+AFTER DELETE ON transaction_amura
+FOR EACH ROW
+BEGIN
+  DELETE FROM transactions
+  WHERE transaction_id = OLD.transaction_id;
+
+  DELETE FROM product_sales
+  WHERE transaction_id = OLD.transaction_id;
+END;
+              </code></pre>           
               
           <div class="col-lg-6">
 
