@@ -113,12 +113,6 @@
           
         <h3>TRIGGER AFTER UPDATE</h3>
           <p>
-          <b>Desc: </b>
-          <i>
-            To ensure that any updates made to the transaction_amura table are consistently reflected in the related transactions and product_sales tables. This helps maintain data integrity across multiple tables connected to the same transaction.
-          </i>
-        </p>
-        <p>
           Trigger Logic:
           <i>
             <ol>
@@ -183,7 +177,21 @@ BEGIN
 
 END
          </code></pre>
-              <h3>TRIGGER AFTER INSERT</h3>  
+              <h3>TRIGGER AFTER INSERT</h3>
+              <p>
+                Trigger Logic:
+                <li>
+                  <i><ol>
+                    <ul>When a new row is inserted into transaction_amura, the system checks if the transaction_id doesn't already exist in the transactions table.</ul>
+                    <ul>If the ID is new:</ul>
+                        <ol>
+                          <li>The transaction data is copied into the transactions table (main transaction data).</li>
+                          <li>The first product from the transaction is copied into the product_sales table.</li>
+                        </ol>
+                  </ol>
+                  </i>
+                </li>
+              </p>
               <section class="project-sql-example">
               <pre><code class="language-sql">CREATE TRIGGER trg_after_insert_transaction_amura
 AFTER INSERT ON transaction_amura
@@ -242,7 +250,7 @@ BEGIN
   END IF;
 END
               </code></pre>
-              <p><b>Desc: </b><i>Simulated SQL query to update the product price in the produk table. This example reflects a typical task I handle as a DBA—ensuring price accuracy through controlled updates, often based on requests from reseller admins or supervisors.</i></p>
+              
             
             
               <section class="project-sql-example">
