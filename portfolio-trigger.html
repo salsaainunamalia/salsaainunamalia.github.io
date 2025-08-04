@@ -236,16 +236,12 @@ END
               <p>
                 Trigger Logic:
                   <i>
-                    <ol>
-                    <ul>When a new row is inserted into transaction_amura, the system checks if the transaction_id doesn't already exist in the transactions table.</ul>
-                    <ul>If the ID is new:</ul>
+                   When a new row is inserted into transaction_amura, the system checks if the transaction_id doesn't already exist in the transactions table. If the ID is new:
                         <ol>
                           <li>The transaction data is copied into the transactions table (main transaction data).</li>
                           <li>The first product from the transaction is copied into the product_sales table.</li>
                         </ol>
-                      </ol>
                     </i>
-               </li>
               </p>
               <h3>TRIGGER AFTER DELETE</h3>
               <pre><code class="language-sql">CREATE trg_after_delete_transaction_amura
