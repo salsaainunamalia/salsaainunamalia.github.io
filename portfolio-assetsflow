@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Portfolio Details</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: EasyFolio
+  * Template URL: https://bootstrapmade.com/easyfolio-bootstrap-portfolio-template/
+  * Updated: Feb 21 2025 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <h1 class="sitename">Salsa Ainun Amalia</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+       <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#resume">Resume</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div class="header-social-links">
+        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
+        <a href="https://www.linkedin.com/in/salsa-ainun-amalia8/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="breadcrumbs">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html#portfolio">Category</a></li>
+            <li class="breadcrumb-item active current">Portfolio Details</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="title-wrapper">
+        <h1>Project Details</h1>
+        <p>This project presents the design of a streamlined data flow, database structure, and ERD for a system that enables employees to view and explore detailed information about company assets. It serves as the foundation for a reliable internal platform tailored to organizational needs.</p>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 g-lg-5">
+        <div class="col-lg-6">
+              <a href="https://ik.imagekit.io/r6talylrh/create-db.png?updatedAt=1754289675485" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/create-db.png?updatedAt=1754289675485" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>Initial dashboard shows 3000++ pending sales orders, indicating potential data mismatches.</i></p>
+            
+              <a href="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>Extracted dummy transaction data to investigate SKU inconsistencies across platforms.</i></p>
+            
+              <a href="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>Used dummy product master data to match SKU codes with product names and variations.</i></p>
+            
+              <a href="https://ik.imagekit.io/r6talylrh/sku-mapping2" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/sku-mapping2" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>Created a dummy mapping table to standardize old SKUs (ID-xxx) into new SKUs (SKU-xxx) for consistent reporting and analytics.</i></p>
+            
+              <a href="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>Designed a simplified ERD focused only on the core tables involved in the SKU inconsistency issue.</i></p>
+            
+              <a href="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>Queried unmatched dummy SKUs that are missing in the SKU mapping table, identifying root causes of failed order sync.</i></p>
+            
+              <a href="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="img-fluid mb-4" alt="">
+              </a>
+              <p><b>Desc: </b><i>Applied COALESCE() to merge old and new dummy SKUs, creating a consistent final SKU reference.</i></p>
+            </div>
+
+
+          <div class="col-lg-6">
+
+            <div class="position-sticky" style="top: 40px">
+              <div class="portfolio-description">
+                <h2>Order Data Cleanup & Optimization in ERP (Perpack)</h2>
+                <p>
+                  In this project, I simulated a real-world scenario I encountered during my time as a Database Administrator at a skincare retail company. The problem? SKU inconsistencies across multiple systems made it difficult to track product transactions properly — especially when identifying pending orders. Some systems still used old SKUs, some used new SKUs, and some used both. This caused chaos when analyzing transaction data or trying to match product movement. So I built a solution using a SKU mapping table that unified the SKU logic and helped me clean and align the data.
+                </p>
+                <h2>The Data Structure</h2>
+                <p>
+                  I worked with three main tables:
+                </p>
+                <ul>
+                  <li>
+                    <strong>products</strong> – the product catalog with all active SKUs
+                  </li>
+                  <li>
+                    <strong>transactions</strong> – a list of sales and pending orders (some using old SKUs)
+                  </li>
+                  <li>
+                    <strong>sku_mapping</strong> – the key to everything! It contains:
+                    <ul>
+                      <li><strong>sku:</strong> can be either the old or new SKU</li>
+                      <li><strong>desc:</strong> explains whether the SKU is an "old" or "new" one</li>
+                      <li><strong>new_sku:</strong> the standardized SKU that we want everything to align with</li>
+                    </ul>
+                  </li>
+                </ul>
+                <h2>My Role in the Process</h2>
+                <p>
+                  As a DBA, i designed the flow so every incoming transaction (regardless of SKU version) could be translated into a standardized SKU, using the mapping table as the translator. Once all SKUs were normalized, I ran checks to find orders that were still in "pending" status but had valid, active SKUs in the product master. This helped other teams (like fulfillment and ops) take action quickly.
+                </p>
+                <h2>Why This Matters</h2>
+                                  <p>
+                    A pending order might seem small, but when you're dealing with hundreds or thousands per day — and SKUs don't match — it's a nightmare.
+                  </p>
+                  <p>This approach:</p>
+                  <ul>
+                    <li>Prevented missing or misread orders</li>
+                    <li>Improved data alignment between departments</li>
+                    <li>Enabled faster decision-making (and cleaner dashboards!)</li>
+                  </ul>
+
+                <h2>Takeaway</h2>
+                <p>
+                  <i>"You can't analyze what you can't align."</i>
+                </p>
+                <p>This project taught me that even small inconsistencies like SKU mismatches can ripple into huge operational delays. As a DBA, my job isn’t just keeping the database alive — it’s making sure the data inside it actually makes sense.</p>
+
+              </div>
+
+              <div class="portfolio-info mt-5">
+                <h3>Project information</h3>
+                <ul>
+                  <li><strong>Category</strong> Learning & Independent Project</li>
+                  <li><strong>Tools</strong>MySQL Workbench, Excel</li>
+                  <li><strong>Project date</strong> June - July, 2025</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </section><!-- /Portfolio Details Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">EasyFolio</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
+        <a href="https://www.linkedin.com/in/salsa-ainun-amalia8/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
