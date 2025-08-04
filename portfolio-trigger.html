@@ -111,20 +111,7 @@
         <div class="row gy-4 g-lg-5">
         <div class="col-lg-6">
           
-        <h3>TRIGGER AFTER UPDATE</h3>
-          <p>
-          Trigger Logic:
-          <i>
-            <ol>
-              <li>
-                The first updates general transaction metadata (created_at, updated_at, channel, cs_name, etc.) in the transactions table.
-              </li>
-              <li>
-                The second updates product-related information (product, qty) in the product_sales table.
-              </li>
-            </ol>
-          </i>
-        </p>          
+        <h3>TRIGGER AFTER UPDATE</h3>          
           <pre><code class="language-sql">CREATE TRIGGER trg_update_after_amura
 AFTER UPDATE ON transaction_amura
 FOR EACH ROW
@@ -176,21 +163,20 @@ BEGIN
 
 END
          </code></pre>
+          <p>
+          Trigger Logic:
+          <i>
+            <ol>
+              <li>
+                The first updates general transaction metadata (created_at, updated_at, channel, cs_name, etc.) in the transactions table.
+              </li>
+              <li>
+                The second updates product-related information (product, qty) in the product_sales table.
+              </li>
+            </ol>
+          </i>
+        </p>
               <h3>TRIGGER AFTER INSERT</h3>
-              <p>
-                Trigger Logic:
-                  <ol>
-                    <i>
-                    <ul>When a new row is inserted into transaction_amura, the system checks if the transaction_id doesn't already exist in the transactions table.</ul>
-                    <ul>If the ID is new:</ul>
-                        <ol>
-                          <li>The transaction data is copied into the transactions table (main transaction data).</li>
-                          <li>The first product from the transaction is copied into the product_sales table.</li>
-                        </ol>
-                      </i>
-                  </ol>
-               </li>
-              </p>
               <pre><code class="language-sql">CREATE TRIGGER trg_after_insert_transaction_amura
 AFTER INSERT ON transaction_amura
 FOR EACH ROW
@@ -248,18 +234,21 @@ BEGIN
   END IF;
 END
               </code></pre>
-
-              <h3>TRIGGER AFTER DELETE</h3>
-                <p>Trigger Logic:</p>
-                <i>
-                <p>
-                  When a row is deleted from transaction_amura, the system will:
+              <p>
+                Trigger Logic:
                   <ol>
-                    <li>Delete the corresponding transaction from the transactions table using the same transaction_id.</li>
-                    <li>Delete related product data from the product_sales table using the same transaction_id.</li>
+                    <i>
+                    <ul>When a new row is inserted into transaction_amura, the system checks if the transaction_id doesn't already exist in the transactions table.</ul>
+                    <ul>If the ID is new:</ul>
+                        <ol>
+                          <li>The transaction data is copied into the transactions table (main transaction data).</li>
+                          <li>The first product from the transaction is copied into the product_sales table.</li>
+                        </ol>
+                      </i>
                   </ol>
-                </p>
-                </i> 
+               </li>
+              </p>
+              <h3>TRIGGER AFTER DELETE</h3>
               <pre><code class="language-sql">CREATE trg_after_delete_transaction_amura
 AFTER DELETE ON transaction_amura
 FOR EACH ROW
@@ -271,6 +260,16 @@ BEGIN
   WHERE transaction_id = OLD.transaction_id;
 END;
               </code></pre>
+              <p>Trigger Logic:</p>
+                  <i>
+                    <p>
+                      When a row is deleted from transaction_amura, the system will:
+                      <ol>
+                        <li>Delete the corresponding transaction from the transactions table using the same transaction_id.</li>
+                        <li>Delete related product data from the product_sales table using the same transaction_id.</li>
+                      </ol>
+                    </p>
+                  </i> 
               </div>
                             
           <div class="col-lg-6">
@@ -298,57 +297,45 @@ END;
                 <ol>
                   <li><strong>AFTER INSERT Trigger:</strong></li>
                     <ul>
-                  <li>
-                    Automatically inserts a new record into the transactions table when a new transaction appears in transaction_amura.
-                  </li>
-                  <li>
-                    Extracts the first product listed in the transaction to insert into product_sales.
-                  </li>
+                      <li>
+                        Automatically inserts a new record into the transactions table when a new transaction appears in transaction_amura.
+                      </li>
+                      <li>
+                        Extracts the first product listed in the transaction to insert into product_sales.
+                      </li>
                    </ul> 
-                  <li>
-                    <strong>New Product Entries </strong>— inserting new SKUs with initial pricing and status
-                  </li>
+                  <li><strong>AFTER UPDATE Trigger:</strong></li>
+                    <ul>
+                      <li>Updates corresponding data in transactions and product_sales when relevant fields in transaction_amura change (e.g., user_name, channel, product, qty).</li>
+                    </ul>
                    <li>
-                    <strong>Transaction Cleanups </strong>— removing duplicate or invalid records based on verified approval
+                    <strong>AFTER DELETE Trigger:</strong>
                   </li>
-                  <li>
-                    <strong>Status Updates </strong>— flagging orders as completed, failed, or refunded
-                  </li>
+                    <ul>
+                      <li>
+                        Removes the linked records in both normalized tables when a transaction is deleted from transaction_amura.
+                      </li>
+                    </ul>
+                  <p>This logic ensures real-time syncing between the original and normalized datasets without requiring any manual steps.</p>
                 </ol>
-                <h2>Tools & Workflow</h2>
+                <h2>Result</h2>
                  <ul>
-                   <li><b>phpMyAdmin:</b> Used to run manual SQL operations directly on live data</li>
-                   <li><b>WhatsApp / Internal Ticketing:</b> Admins typically send requests via WhatsApp or chat with specific instructions</li>
-                   <li><b>SQL Queries:</b> UPDATE, INSERT, DELETE, and some simple JOIN checks for data validation</li>
-                   <li><b>Cross-checking:</b> Double-checked against product master or CRM data to ensure consistency</li>
+                   <li>Fully automated insertion and cleanup process.</li>
+                   <li>Reduced the analyst’s workload and minimized the chance of human error.</li>
+                   <li>Created a seamless pipeline where any change in the source (transaction_amura) is instantly reflected in the reporting tables.</li>
                  </ul>
                 <h2>Impact</h2>
-                  <p>While the queries are relatively simple, the impact is operationally significant:</p>
                   <ul>
-                    <li>Ensures accurate sales reports</li>
-                    <li>Prevents miscommunication with resellers</li>
-                    <li>Reduces downstream errors in logistics and billing</li>
-                    <li>Maintains trust between teams and systems</li>
+                    <li>Saved 80% of manual entry time per day.</li>
+                    <li>Reduced human error in data insertion and deletion.</li>
+                    <li>Enabled analysts to focus more on insights and less on routine tasks.</li>
                   </ul>
-
-                  <div class="testimonial-item">
-                  <p>
-                    <i class="bi bi-quote quote-icon-left"></i>
-                    <span>She's been incredibly helpful with my work, especially when things needed to move quickly like updating the core system. She's super responsive and easy to communicate with. So far, I’ve really enjoyed working with Salsa.</span>
-                    <i class="bi bi-quote quote-icon-right"></i>
-                  </p>
-                  <div>
-                    <img src="https://ik.imagekit.io/r6talylrh/Pupu-Oktavia.jpg?updatedAt=1752486432639" class="testimonial-img" alt="">
-                    <h3>Pupu Oktavia</h3>
-                    <h4>Sales Administration</h4>
-                  </div>
-                </div>
                 
                 <h2 class="text-left">Takeaway</h2>
                 <p>
-                  <i>"Even the simplest queries carry weight when they impact real transactions."</i>
+                  <i>"Efficiency isn’t just about speed, it’s about freeing minds from repetition to focus on results."</i>
                 </p>
-                <p>This task has strengthened my attention to detail and taught me the importance of precision, especially when working with live business data that affects customers, finance, and logistics.</p>
+                <p>Implementing post-insert triggers can significantly enhance data workflows, especially when bridging between raw transactional tables and normalized analytical schemas. It also offloads manual burdens from analysts, allowing them to focus more on insight-generation than data wrangling.</p>
 
               </div>
 
@@ -356,8 +343,8 @@ END;
                 <h3>Project information</h3>
                 <ul>
                   <li><strong>Category</strong>Database Management & Optimizations</li>
-                  <li><strong>Tools</strong>phpMyAdmin</li>
-                  <li><strong>Project date</strong> Feb - Present, 2025</li>
+                  <li><strong>Tools</strong>MySQL Workbench</li>
+                  <li><strong>Project date</strong>July - Present, 2025</li>
                 </ul>
               </div>
             </div>
