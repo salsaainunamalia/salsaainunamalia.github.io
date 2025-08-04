@@ -277,21 +277,34 @@ END;
 
             <div class="position-sticky" style="top: 40px">
               <div class="portfolio-description">
-                <h2>Reseller Sales Data Management (Ongoing Operational Task)</h2>
+                <h2>Trigger-Based Automation After Data Normalization to 2NF</h2>
                 <p>
-                  This ongoing task involves managing transactional data for B2B resellers, including price changes, order revisions, new product entries, and record cleanup. I primarily work through phpMyAdmin, executing structured SQL queries to ensure that all updates are accurately reflected in the system and that data integrity is maintained across related tables. These actions are typically triggered by requests from the admin team or reseller-facing divisions, often in time sensitive scenarios where incorrect data could impact billing, delivery, or customer satisfaction.
+                  The project started with a denormalized table, transaction_amura, which stored all transaction details in a flat structure. To optimize data handling, especially for analysis and reporting, I normalized this table into two separate tables:
+                  <ul>
+                    <li>transactions: containing general transaction info</li>
+                    <li>product_sales: storing item-level sales data</li>
+                  </ul>
                 </p>
-                <h2>Data Types Commonly Managed</h2>
                 <p>
-                  The most frequent types of data I update or maintain include:
+                  This normalization from 1NF to 2NF made querying more efficient. However, it created an unintended challenge:
                 </p>
-                <ul>
+                <p>
+                  The data analyst had to manually insert cleaned and processed data—pulled from marketplaces and transformed using Python and SQL—into the normalized tables one by one. Given the daily, weekly, and monthly increase in transaction volume, this manual process became overwhelming and error-prone.
+                </p>
+                <h2>Solution (Trigger Implementation):</h2>
+                <p>
+                 To address this, I created a set of MySQL triggers directly on the transaction_amura table. These triggers automate the population and synchronization of the normalized tables as follows:
+                </p>
+                <ol>
+                  <li><strong>AFTER INSERT Trigger:</strong></li>
+                    <ul>
                   <li>
-                    <strong>Product Pricing Adjustments </strong>— price corrections for SKUs requested by admin or pricing teams
+                    Automatically inserts a new record into the transactions table when a new transaction appears in transaction_amura.
                   </li>
                   <li>
-                    <strong>Order Modifications </strong>— changes to quantity, item replacement, or cancellations due to stock or request errors
+                    Extracts the first product listed in the transaction to insert into product_sales.
                   </li>
+                   </ul> 
                   <li>
                     <strong>New Product Entries </strong>— inserting new SKUs with initial pricing and status
                   </li>
@@ -301,7 +314,7 @@ END;
                   <li>
                     <strong>Status Updates </strong>— flagging orders as completed, failed, or refunded
                   </li>
-                </ul>
+                </ol>
                 <h2>Tools & Workflow</h2>
                  <ul>
                    <li><b>phpMyAdmin:</b> Used to run manual SQL operations directly on live data</li>
