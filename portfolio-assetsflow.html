@@ -92,71 +92,67 @@
 
         <div class="row gy-4 g-lg-5">
         <div class="col-lg-6">
-              <a href="https://ik.imagekit.io/r6talylrh/create-db.png?updatedAt=1754289675485" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/create-db.png?updatedAt=1754289675485" class="img-fluid mb-4" alt="">
+              <a href="https://ik.imagekit.io/r6talylrh/ERD-ASSETS.png?updatedAt=1755483663594" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/ERD-ASSETS.png?updatedAt=1755483663594" class="img-fluid mb-4" alt="">
               </a>
-              <p><b>Desc: </b><i>Initial dashboard shows 3000++ pending sales orders, indicating potential data mismatches.</i></p>
+              <p><b>Desc: </b><i>Illustrates core entities and relationships for asset tracking, employee roles, location hierarchy, and user access. Supports end-to-end visibility, secure role-based control, and structured data flow across business units</i></p>
             
-              <a href="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/transactions-table?updatedAt=1751438095056" class="img-fluid mb-4" alt="">
+              <a href="https://ik.imagekit.io/r6talylrh/USECASE-ASSETS.png?updatedAt=1755483663799" class="glightbox">
+                <img src="https://ik.imagekit.io/r6talylrh/USECASE-ASSETS.png?updatedAt=1755483663799" class="img-fluid mb-4" alt="">
               </a>
-              <p><b>Desc: </b><i>Extracted dummy transaction data to investigate SKU inconsistencies across platforms.</i></p>
+              <p><b>Desc: </b><i>Depicts interactions between Admin and Users. Admin manages data; Users access asset info and history. Includes include/extend relationships for process clarity..</i></p>
             
-              <a href="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/product-data?updatedAt=1751440161442" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Used dummy product master data to match SKU codes with product names and variations.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/sku-mapping2" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/sku-mapping2" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Created a dummy mapping table to standardize old SKUs (ID-xxx) into new SKUs (SKU-xxx) for consistent reporting and analytics.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/ERD-transactionspending?updatedAt=1751440954963" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Designed a simplified ERD focused only on the core tables involved in the SKU inconsistency issue.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/data-observe?updatedAt=1751438087837" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Queried unmatched dummy SKUs that are missing in the SKU mapping table, identifying root causes of failed order sync.</i></p>
-            
-              <a href="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="glightbox">
-                <img src="https://ik.imagekit.io/r6talylrh/data-cleaning?updatedAt=1751438092665" class="img-fluid mb-4" alt="">
-              </a>
-              <p><b>Desc: </b><i>Applied COALESCE() to merge old and new dummy SKUs, creating a consistent final SKU reference.</i></p>
-            </div>
+              </div>
 
 
           <div class="col-lg-6">
 
             <div class="position-sticky" style="top: 40px">
               <div class="portfolio-description">
-                <h2>Order Data Cleanup & Optimization in ERP (Perpack)</h2>
+                <h2>Designing a Role-Based Login System for Asset Management</h2>
                 <p>
-                  In this project, I simulated a real-world scenario I encountered during my time as a Database Administrator at a skincare retail company. The problem? SKU inconsistencies across multiple systems made it difficult to track product transactions properly — especially when identifying pending orders. Some systems still used old SKUs, some used new SKUs, and some used both. This caused chaos when analyzing transaction data or trying to match product movement. So I built a solution using a SKU mapping table that unified the SKU logic and helped me clean and align the data.
+                  This project was initiated to address inefficiencies in the company’s asset management process. Previously, asset tracking and recording were done manually, which often led to errors, inconsistencies, and difficulties in locating or transferring assets. There was no proper record of asset transfers, making it harder for both IT and General Affairs (GA) to monitor equipment such as PCs, networks, desks, and chairs.
                 </p>
-                <h2>The Data Structure</h2>
                 <p>
-                  I worked with three main tables:
+                  During the early stages, I faced several challenges due to a lack of coordination within my IT team. For more than a month, I did not receive clear direction or briefing from my leader or IT support, which caused delays. Additionally, my leader often emphasized only technical issues and “the simplest way out,” without considering user convenience. To ensure the system truly helps users, I decided to take initiative and consulted directly with the GA senior, who manages office assets daily. From these discussions, I identified the need for an Asset Transfer feature, which was not initially considered. I then integrated this feature into the system design so users could track asset movements more effectively.
                 </p>
-                <ul>
+                <p>
+                  This proactive approach helped shape a system that is not only technically functional but also user-friendly and aligned with real operational needs.
+                </p>
+                <h2>Entity Relationship Diagram (ERD) Overview</h2>
+                <p>
+                 The ERD represents the database structure for the Asset Management System. It consists of multiple interconnected entities that handle assets, users, employees, locations, and asset transfers. Key points include:
+                </p>
+                <ol>
                   <li>
-                    <strong>products</strong> – the product catalog with all active SKUs
+                    <strong>Core Asset Data</strong>
                   </li>
-                  <li>
-                    <strong>transactions</strong> – a list of sales and pending orders (some using old SKUs)
-                  </li>
-                  <li>
-                    <strong>sku_mapping</strong> – the key to everything! It contains:
                     <ul>
-                      <li><strong>sku:</strong> can be either the old or new SKU</li>
-                      <li><strong>desc:</strong> explains whether the SKU is an "old" or "new" one</li>
-                      <li><strong>new_sku:</strong> the standardized SKU that we want everything to align with</li>
+                      <li>assets table stores asset details such as specifications, serial number, model, category, and status.</li>
+                      <li>category_asset and sub_category_asset provide classification and categorization.</li>
                     </ul>
+                  <li>
+                    <strong>Organizational Structure</strong>
                   </li>
-                </ul>
+                  <ul>
+                    <li>employees, departments, and bisnis_unit represent the organizational hierarchy and relationships.</li>
+                    <li>locations and buildings manage the physical placement of assets.</li>
+                  </ul>
+                  <li>
+                    <strong>Transactions & Tracking</strong>
+                  </li>
+                    <ul>
+                      <li>asset_transfer records asset movement between employees or locations.</li>
+                      <li>user_assets links assets to employees for tracking assignments.</li>
+                    </ul>
+                  <li>
+                    <strong>User & Role Management</strong>
+                  </li>
+                  <ul>
+                    <li>users table manages login credentials, linked with roles for access control.</li>
+                  </ul>
+                </ol>
+                <p>Together, this ERD ensures the system is capable of managing both <b>static data</b> (like categories and locations) and <b>dynamic transactions</b> (such as transfers and user assignments).</p>
                 <h2>My Role in the Process</h2>
                 <p>
                   As a DBA, i designed the flow so every incoming transaction (regardless of SKU version) could be translated into a standardized SKU, using the mapping table as the translator. Once all SKUs were normalized, I ran checks to find orders that were still in "pending" status but had valid, active SKUs in the product master. This helped other teams (like fulfillment and ops) take action quickly.
