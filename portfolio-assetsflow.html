@@ -100,7 +100,8 @@
               <a href="https://ik.imagekit.io/r6talylrh/USECASE-ASSETS.png?updatedAt=1755483663799" class="glightbox">
                 <img src="https://ik.imagekit.io/r6talylrh/USECASE-ASSETS.png?updatedAt=1755483663799" class="img-fluid mb-4" alt="">
               </a>
-              <p><b>Desc: </b><i>Depicts interactions between Admin and Users. Admin manages data; Users access asset info and history. Includes include/extend relationships for process clarity..</i></p>
+              <p><b>Desc: </b><i>Depicts interactions between Admin and Users. Admin manages data; Users access asset info and history. Includes include/extend relationships for process clarity.</i></p>
+              <p><i>Notes: This use case and ERD were developed based on discussions with the front-end team regarding current availability and technical conditions. It should be noted that both the use case and ERD may undergo future development or functional adjustments if new conditions or additional requirements arise.</i></p>
             
               </div>
 
@@ -119,6 +120,16 @@
                 <p>
                   This proactive approach helped shape a system that is not only technically functional but also user-friendly and aligned with real operational needs.
                 </p>
+                <h2>My Role in This Project</h2>
+                <p>In this project, I was responsible for designing and developing the database structure to ensure data consistency, efficiency, and scalability. My main tasks included:</p>
+                <ul>
+                  <li><b>Analyzing Requirements</b> – Interpreted business and system needs to translate them into logical database structures.</li>
+                  <li><b>Designing ERD (Entity Relationship Diagram)</b> – Built the ERD as a blueprint for the database, defining entities, relationships, and constraints.</li>
+                  <li><b>Creating Use Case Scenarios</b> – Developed use case diagrams to illustrate system interactions and data flows <i>(requested by front end)</i></li>
+                  <li><b>Database Implementation.</b> – Converted ERD into a physical database using MySQL, ensuring normalization and optimized queries</li>
+                  <li><b>Collaboration & Documentation</b> – Worked closely with the team to align database design with application requirements and documented all design decisions.</li>
+                </ul>
+                <p>This role strengthened my skills in database administration, system analysis, and problem-solving, while also improving my ability to communicate technical concepts to both technical and non-technical stakeholders.</p>
                 <h2>Entity Relationship Diagram (ERD) Overview</h2>
                 <p>
                  The ERD represents the database structure for the Asset Management System. It consists of multiple interconnected entities that handle assets, users, employees, locations, and asset transfers. Key points include:
@@ -153,26 +164,42 @@
                   </ul>
                 </ol>
                 <p>Together, this ERD ensures the system is capable of managing both <b>static data</b> (like categories and locations) and <b>dynamic transactions</b> (such as transfers and user assignments).</p>
-                <h2>My Role in the Process</h2>
-                <p>
-                  As a DBA, i designed the flow so every incoming transaction (regardless of SKU version) could be translated into a standardized SKU, using the mapping table as the translator. Once all SKUs were normalized, I ran checks to find orders that were still in "pending" status but had valid, active SKUs in the product master. This helped other teams (like fulfillment and ops) take action quickly.
-                </p>
-                <h2>Why This Matters</h2>
-                                  <p>
-                    A pending order might seem small, but when you're dealing with hundreds or thousands per day — and SKUs don't match — it's a nightmare.
+                <h2>Why I Designed the Data Flow in This Way</h2>
+                  <p>
+                    I built the ERD from scratch by analyzing the system requirements and aligning them with the use case design. The structure was created to ensure clear data relationships, minimize redundancy, and support scalability for future enhancements. Each entity and relationship was carefully mapped to reflect real system interactions, making the database not only efficient but also adaptable to potential upgrades as the project evolves.
                   </p>
-                  <p>This approach:</p>
+                <h2>Use Case Overview</h2>
+                <p>
+                  The Use Case Diagram illustrates the interactions between system actors (Admin and Users) and the system itself.
+                </p>
+                <ol>
+                  <li>
+                    <strong>Admin Capabilities:</strong>
+                  </li>
                   <ul>
-                    <li>Prevented missing or misread orders</li>
-                    <li>Improved data alignment between departments</li>
-                    <li>Enabled faster decision-making (and cleaner dashboards!)</li>
+                    <li>Register new users</li>
+                    <li>Manage core data: Users, Employees, Departments, Business Units, Locations, and Assets</li>
+                    <li>Manage classifications: Category and Subcategory of Assets</li>
+                    <li>Manage transactions: User assets and asset transfers</li>
+                    <li>Control system access via login and logout</li>
                   </ul>
+                  <li>
+                    <strong>User Capabilities:</strong>
+                  </li>
+                  <ul>
+                    <li>Login to access the system</li>
+                    <li>View assigned asset data</li>
+                    <li>Search asset information</li>
+                    <li>View historical transfer records for assigned assets</li>
+                  </ul>
+                  <p>This separation ensures that administrators are responsible for data integrity and asset lifecycle management, while end-users focus on visibility and accountability of the assets assigned to them.</p>
+                </ol>
 
                 <h2>Takeaway</h2>
                 <p>
-                  <i>"You can't analyze what you can't align."</i>
+                  <i>"Difficulties in life are meant to push us forward, not hold us back. Sometimes, lack of support becomes the reason we discover our own strength"</i>
                 </p>
-                <p>This project taught me that even small inconsistencies like SKU mismatches can ripple into huge operational delays. As a DBA, my job isn’t just keeping the database alive — it’s making sure the data inside it actually makes sense.</p>
+                <p>In this project, I learned that building a system is not just about technical simplicity but about making it truly practical and useful for end-users. By taking the initiative to step outside of my team and directly engage with the General Affairs team, I was able to design a solution that addressed real needs. Despite limited guidance from my IT support and leader, I pushed the project forward with resilience and responsibility. Most importantly, I realized that challenges can actually spark greater creativity and innovation when approached with the right mindset.</p>
 
               </div>
 
