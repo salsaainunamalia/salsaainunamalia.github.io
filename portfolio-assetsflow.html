@@ -8,12 +8,6 @@
   <meta name="description" content="">
   <meta name="keywords" content="">
 
-  <style>
-  html {
-  scroll-behavior: smooth;
-  }
-  </style>
-
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -265,7 +259,33 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
 
+  <!-- Equal Height Columns -->
+  <script>
+    function equalizeColumns() {
+      const left = document.querySelector('.portfolio-details .col-lg-6:first-child');
+      const right = document.querySelector('.portfolio-details .col-lg-6:last-child');
+      if (left && right) {
+        // reset dulu biar bisa hitung ulang kalau resize
+        left.style.minHeight = "auto";
+        right.style.minHeight = "auto";
+
+        const maxHeight = Math.max(left.offsetHeight, right.offsetHeight);
+        left.style.minHeight = maxHeight + "px";
+        right.style.minHeight = maxHeight + "px";
+      }
+    }
+
+    // jalanin pas load & resize
+    window.addEventListener('load', equalizeColumns);
+    window.addEventListener('resize', equalizeColumns);
+  </script>
+</body>
+</html>
+
+  
 </body>
 
 </html>
