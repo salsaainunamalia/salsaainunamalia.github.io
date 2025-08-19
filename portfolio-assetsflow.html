@@ -112,6 +112,7 @@
 
           <div class="col-lg-6">
 
+          <div class="position-sticky" style="top: 40px">
            <div class="portfolio-description">
                 <h2>Designing a Role-Based Login System for Asset Management</h2>
                 <p>
@@ -132,68 +133,7 @@
                   <li><b>Database Implementation.</b> – Converted ERD into a physical database using MySQL, ensuring normalization and optimized queries</li>
                   <li><b>Collaboration & Documentation</b> – Worked closely with the team to align database design with application requirements and documented all design decisions.</li>
                 </ul>
-                <p>This role strengthened my skills in database administration, system analysis, and problem-solving, while also improving my ability to communicate technical concepts to both technical and non-technical stakeholders.</p>
-                <h2>Entity Relationship Diagram (ERD) Overview</h2>
-                <p>
-                 The ERD represents the database structure for the Asset Management System. It consists of multiple interconnected entities that handle assets, users, employees, locations, and asset transfers. Key points include:
-                </p>
-                <ol>
-                  <li>
-                    <strong>Core Asset Data</strong>
-                  </li>
-                    <ul>
-                      <li>assets table stores asset details such as specifications, serial number, model, category, and status.</li>
-                      <li>category_asset and sub_category_asset provide classification and categorization.</li>
-                    </ul>
-                  <li>
-                    <strong>Organizational Structure</strong>
-                  </li>
-                  <ul>
-                    <li>employees, departments, and bisnis_unit represent the organizational hierarchy and relationships.</li>
-                    <li>locations and buildings manage the physical placement of assets.</li>
-                  </ul>
-                  <li>
-                    <strong>Transactions & Tracking</strong>
-                  </li>
-                    <ul>
-                      <li>asset_transfer records asset movement between employees or locations.</li>
-                      <li>user_assets links assets to employees for tracking assignments.</li>
-                    </ul>
-                  <li>
-                    <strong>User & Role Management</strong>
-                  </li>
-                  <ul>
-                    <li>users table manages login credentials, linked with roles for access control.</li>
-                  </ul>
-                </ol>
-                <p>Together, this ERD ensures the system is capable of managing both <b>static data</b> (like categories and locations) and <b>dynamic transactions</b> (such as transfers and user assignments).</p>
-                
-                <h2>Use Case Overview</h2>
-                <p>
-                  The Use Case Diagram illustrates the interactions between system actors (Admin and Users) and the system itself.
-                </p>
-                <ol>
-                  <li>
-                    <strong>Admin Capabilities:</strong>
-                  </li>
-                  <ul>
-                    <li>Register new users</li>
-                    <li>Manage core data: Users, Employees, Departments, Business Units, Locations, and Assets</li>
-                    <li>Manage classifications: Category and Subcategory of Assets</li>
-                    <li>Manage transactions: User assets and asset transfers</li>
-                    <li>Control system access via login and logout</li>
-                  </ul>
-                  <li>
-                    <strong>User Capabilities:</strong>
-                  </li>
-                  <ul>
-                    <li>Login to access the system</li>
-                    <li>View assigned asset data</li>
-                    <li>Search asset information</li>
-                    <li>View historical transfer records for assigned assets</li>
-                  </ul>
-                  <p>This separation ensures that administrators are responsible for data integrity and asset lifecycle management, while end-users focus on visibility and accountability of the assets assigned to them.</p>
-                </ol>
+                <p>This role strengthened my skills in database administration, system analysis, and problem-solving, while also improving my ability to communicate technical concepts to both technical and non-technical stakeholders.</p
 
                 <h2>Takeaway</h2>
                 <p>
@@ -215,6 +155,8 @@
 
           </div>
         </div>
+
+      </div>
 
     </section><!-- /Portfolio Details Section -->
 
