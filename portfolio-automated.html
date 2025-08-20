@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Portfolio Details</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  
+
+  <style>
+  pre[class*="language-"] {
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 14px;
+  }
+  
+    .text-left {
+      text-align: left;
+    }
+  </style>
+
+   <!-- Prism Highlight CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.css" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;700&display=swap" rel="stylesheet">
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="assets/css/main.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: EasyFolio
+  * Template URL: https://bootstrapmade.com/easyfolio-bootstrap-portfolio-template/
+  * Updated: Feb 21 2025 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body class="portfolio-details-page">
+
+  <header id="header" class="header d-flex align-items-center sticky-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.webp" alt=""> -->
+        <h1 class="sitename">Salsa Ainun Amalia</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+       <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#resume">Resume</a></li>
+          <li><a href="index.html#portfolio">Portfolio</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+
+      <div class="header-social-links">
+        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
+        <a href="https://www.linkedin.com/in/salsa-ainun-amalia8/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="breadcrumbs">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html"><i class="bi bi-house"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="index.html#portfolio">Category</a></li>
+            <li class="breadcrumb-item active current">Portfolio Details</li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="title-wrapper">
+        <h1>Project Details</h1>
+        <p>Designed and implemented a database solution to streamline complex query execution in MySQL. Instead of using inefficient triggers <i>(as requested by my data analyst)</i>, I built stored procedures that allow analysts to generate daily transaction summaries on demand.</p>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Portfolio Details Section -->
+    <section id="portfolio-details" class="portfolio-details section">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4 g-lg-5">
+        <div class="col-lg-6">
+                   
+          <pre><code class="language-sql">CREATE PROCEDURE `update_marketplace_summary`()
+BEGIN
+
+  -- The following is the query my data analyst wants to automate
+  -- FIRST TIME BUYERS
+  DROP TABLE IF EXISTS marketplace_first_include_blank;
+  CREATE TABLE marketplace_first_include_blank AS
+  WITH RECURSIVE calendar_per_brand AS (
+    SELECT id_brand, MIN(DATE(created_at)) AS created_at_date
+    FROM transaction_amura
+    GROUP BY id_brand
+
+    UNION ALL
+
+    SELECT id_brand, DATE_ADD(created_at_date, INTERVAL 1 DAY)
+    FROM calendar_per_brand
+    WHERE DATE_ADD(created_at_date, INTERVAL 1 DAY) < CURRENT_DATE()
+  ),
+  dates_and_brands AS (
+    SELECT created_at_date, id_brand
+    FROM calendar_per_brand
+  ),
+  unique_tx AS (
+    SELECT
+      user_id, transaction_id, DATE(created_at) AS created_at_date, product, channel, id_brand, qty, price, `desc`,
+      ROW_NUMBER() OVER (PARTITION BY user_id, transaction_id ORDER BY created_at) AS rn,
+      DENSE_RANK() OVER (PARTITION BY user_id ORDER BY DATE(created_at), transaction_id) AS purchase_order,
+      CASE WHEN DENSE_RANK() OVER (PARTITION BY user_id ORDER BY DATE(created_at), transaction_id) = 1 THEN 'first' ELSE '' END AS first_user
+    FROM transaction_amura
+    WHERE channel != 'Whatsapp'
+  ),
+  first_tx AS (
+    SELECT user_id, transaction_id, created_at_date, price, id_brand
+    FROM unique_tx
+    WHERE first_user = 'first' AND rn = 1
+  ),
+  transaction_summary AS (
+    SELECT created_at_date, id_brand, COUNT(DISTINCT transaction_id) AS total_tx, SUM(price) AS gmv
+    FROM first_tx
+    GROUP BY created_at_date, id_brand
+  ),
+  product_summary AS (
+    SELECT created_at_date, id_brand, SUM(qty) AS product_sold
+    FROM unique_tx
+    WHERE first_user = 'first'
+    GROUP BY created_at_date, id_brand
+  ),
+  base_data AS (
+    SELECT 
+      d.created_at_date, d.id_brand,
+      COALESCE(p.product_sold, 0) AS product_sold,
+      COALESCE(t.total_tx, 0) AS total_tx,
+      COALESCE(t.gmv, 0) AS gmv
+    FROM dates_and_brands d
+    LEFT JOIN product_summary p ON d.created_at_date = p.created_at_date AND d.id_brand = p.id_brand
+    LEFT JOIN transaction_summary t ON d.created_at_date = t.created_at_date AND d.id_brand = t.id_brand
+  ),
+  flag AS (
+  SELECT
+    *,
+    CASE WHEN total_tx = 0 THEN 1 ELSE 0 END AS is_holiday,
+    CASE WHEN total_tx > 0 THEN 1 ELSE 0 END AS is_donor
+  FROM base_data
+),
+
+donor_flagged AS (
+  SELECT *,
+    CASE WHEN is_donor = 1 THEN ROW_NUMBER() OVER (PARTITION BY id_brand ORDER BY created_at_date) END AS donor_group_id
+  FROM flag
+),
+
+donor_rows AS (
+  SELECT
+    id_brand,
+    created_at_date,
+    ROW_NUMBER() OVER (PARTITION BY id_brand ORDER BY created_at_date) AS donor_group
+  FROM flag
+  WHERE is_donor = 1
+),
+
+flag_donor_joined AS (
+  SELECT
+    f.*,
+    d.created_at_date AS donor_date,
+    d.donor_group,
+    ROW_NUMBER() OVER (
+      PARTITION BY f.id_brand, f.created_at_date
+      ORDER BY d.created_at_date
+    ) AS rn
+  FROM flag f
+  LEFT JOIN donor_rows d
+    ON f.id_brand = d.id_brand AND d.created_at_date >= f.created_at_date
+  WHERE f.is_donor = 1 OR f.is_holiday = 1
+),
+
+flag_grouped AS (
+  SELECT *
+  FROM flag_donor_joined
+  WHERE rn = 1
+),
+
+
+group_counts AS (
+  SELECT
+    id_brand,
+    donor_group,
+    COUNT(CASE WHEN is_holiday = 1 THEN 1 END) AS holiday_days,
+    COUNT(CASE WHEN is_donor = 1 THEN 1 END) AS donor_days
+  FROM flag_grouped
+  GROUP BY id_brand, donor_group
+),
+
+donor_values AS (
+  SELECT
+    fg.id_brand,
+    fg.donor_group,
+    fg.created_at_date AS donor_date,
+    fg.total_tx AS donor_total_tx,
+    fg.gmv AS donor_gmv,
+    fg.product_sold AS donor_product_sold
+  FROM flag_grouped fg
+  WHERE fg.is_donor = 1
+),
+
+final_distribution AS (
+  SELECT
+    fg.created_at_date,
+    fg.id_brand,
+    fg.total_tx,
+    fg.gmv,
+    fg.product_sold,
+    fg.is_holiday,
+    fg.is_donor,
+    gc.holiday_days,
+    gc.donor_days,
+    (gc.holiday_days + gc.donor_days) AS total_days,
+    dv.donor_total_tx,
+    dv.donor_gmv,
+    dv.donor_product_sold,
+    CASE 
+      WHEN fg.is_donor = 1 OR fg.is_holiday = 1 THEN dv.donor_total_tx / (gc.holiday_days + gc.donor_days)
+      ELSE fg.total_tx
+    END AS adjusted_total_tx,
+    CASE 
+      WHEN fg.is_donor = 1 OR fg.is_holiday = 1 THEN dv.donor_gmv / (gc.holiday_days + gc.donor_days)
+      ELSE fg.gmv
+    END AS adjusted_gmv,
+    CASE 
+      WHEN fg.is_donor = 1 OR fg.is_holiday = 1 THEN dv.donor_product_sold / (gc.holiday_days + gc.donor_days)
+      ELSE fg.product_sold
+    END AS adjusted_product_sold
+  FROM flag_grouped fg
+  JOIN group_counts gc ON fg.id_brand = gc.id_brand AND fg.donor_group = gc.donor_group
+  JOIN donor_values dv ON fg.id_brand = dv.id_brand AND fg.donor_group = dv.donor_group
+)
+  SELECT
+    created_at_date, id_brand,
+    ROUND(adjusted_total_tx, 2) AS total_tx,
+    ROUND(adjusted_gmv, 2) AS gmv,
+    ROUND(adjusted_product_sold, 2) AS product_sold,
+    CASE WHEN adjusted_total_tx <> 0 THEN ROUND(adjusted_gmv / adjusted_total_tx, 2) ELSE NULL END AS aov,
+    CASE WHEN adjusted_product_sold <> 0 THEN ROUND(adjusted_gmv / adjusted_product_sold, 2) ELSE NULL END AS rpu
+  FROM final_distribution
+  ORDER BY id_brand, created_at_date;
+
+  -- RETAINED BUYERS
+  DROP TABLE IF EXISTS marketplace_retention_include_blank;
+  CREATE TABLE marketplace_retention_include_blank AS
+  WITH RECURSIVE calendar_per_brand AS (
+    SELECT id_brand, MIN(DATE(created_at)) AS created_at_date
+    FROM transaction_amura
+    GROUP BY id_brand
+
+    UNION ALL
+
+    SELECT id_brand, DATE_ADD(created_at_date, INTERVAL 1 DAY)
+    FROM calendar_per_brand
+    WHERE DATE_ADD(created_at_date, INTERVAL 1 DAY) < CURRENT_DATE()
+  ),
+  dates_and_brands AS (
+    SELECT created_at_date, id_brand
+    FROM calendar_per_brand
+  ),
+  unique_tx AS (
+    SELECT
+      user_id, transaction_id, DATE(created_at) AS created_at_date, product, channel, id_brand, qty, price, `desc`,
+      ROW_NUMBER() OVER (PARTITION BY user_id, transaction_id ORDER BY created_at) AS rn,
+      DENSE_RANK() OVER (PARTITION BY user_id ORDER BY DATE(created_at), transaction_id) AS purchase_order,
+      CASE WHEN DENSE_RANK() OVER (PARTITION BY user_id ORDER BY DATE(created_at), transaction_id) >= 2 THEN 'retained' ELSE '' END AS retained_user
+    FROM transaction_amura
+    WHERE channel != 'Whatsapp'
+  ),
+  first_tx AS (
+    SELECT user_id, transaction_id, created_at_date, price, id_brand
+    FROM unique_tx
+    WHERE retained_user = 'retained' AND rn = 1
+  ),
+  transaction_summary AS (
+    SELECT created_at_date, id_brand, COUNT(DISTINCT transaction_id) AS total_tx, SUM(price) AS gmv
+    FROM first_tx
+    GROUP BY created_at_date, id_brand
+  ),
+  product_summary AS (
+    SELECT created_at_date, id_brand, SUM(qty) AS product_sold
+    FROM unique_tx
+    WHERE retained_user = 'retained'
+    GROUP BY created_at_date, id_brand
+  ),
+  base_data AS (
+    SELECT 
+      d.created_at_date, d.id_brand,
+      COALESCE(p.product_sold, 0) AS product_sold,
+      COALESCE(t.total_tx, 0) AS total_tx,
+      COALESCE(t.gmv, 0) AS gmv
+    FROM dates_and_brands d
+    LEFT JOIN product_summary p ON d.created_at_date = p.created_at_date AND d.id_brand = p.id_brand
+    LEFT JOIN transaction_summary t ON d.created_at_date = t.created_at_date AND d.id_brand = t.id_brand
+  ),
+  flag AS (
+  SELECT
+    *,
+    CASE WHEN total_tx = 0 THEN 1 ELSE 0 END AS is_holiday,
+    CASE WHEN total_tx > 0 THEN 1 ELSE 0 END AS is_donor
+  FROM base_data
+),
+
+donor_flagged AS (
+  SELECT *,
+    CASE WHEN is_donor = 1 THEN ROW_NUMBER() OVER (PARTITION BY id_brand ORDER BY created_at_date) END AS donor_group_id
+  FROM flag
+),
+
+donor_rows AS (
+  SELECT
+    id_brand,
+    created_at_date,
+    ROW_NUMBER() OVER (PARTITION BY id_brand ORDER BY created_at_date) AS donor_group
+  FROM flag
+  WHERE is_donor = 1
+),
+
+flag_donor_joined AS (
+  SELECT
+    f.*,
+    d.created_at_date AS donor_date,
+    d.donor_group,
+    ROW_NUMBER() OVER (
+      PARTITION BY f.id_brand, f.created_at_date
+      ORDER BY d.created_at_date
+    ) AS rn
+  FROM flag f
+  LEFT JOIN donor_rows d
+    ON f.id_brand = d.id_brand AND d.created_at_date >= f.created_at_date
+  WHERE f.is_donor = 1 OR f.is_holiday = 1
+),
+
+flag_grouped AS (
+  SELECT *
+  FROM flag_donor_joined
+  WHERE rn = 1
+),
+
+
+group_counts AS (
+  SELECT
+    id_brand,
+    donor_group,
+    COUNT(CASE WHEN is_holiday = 1 THEN 1 END) AS holiday_days,
+    COUNT(CASE WHEN is_donor = 1 THEN 1 END) AS donor_days
+  FROM flag_grouped
+  GROUP BY id_brand, donor_group
+),
+
+donor_values AS (
+  SELECT
+    fg.id_brand,
+    fg.donor_group,
+    fg.created_at_date AS donor_date,
+    fg.total_tx AS donor_total_tx,
+    fg.gmv AS donor_gmv,
+    fg.product_sold AS donor_product_sold
+  FROM flag_grouped fg
+  WHERE fg.is_donor = 1
+),
+
+final_distribution AS (
+  SELECT
+    fg.created_at_date,
+    fg.id_brand,
+    fg.total_tx,
+    fg.gmv,
+    fg.product_sold,
+    fg.is_holiday,
+    fg.is_donor,
+    gc.holiday_days,
+    gc.donor_days,
+    (gc.holiday_days + gc.donor_days) AS total_days,
+    dv.donor_total_tx,
+    dv.donor_gmv,
+    dv.donor_product_sold,
+    CASE 
+      WHEN fg.is_donor = 1 OR fg.is_holiday = 1 THEN dv.donor_total_tx / (gc.holiday_days + gc.donor_days)
+      ELSE fg.total_tx
+    END AS adjusted_total_tx,
+    CASE 
+      WHEN fg.is_donor = 1 OR fg.is_holiday = 1 THEN dv.donor_gmv / (gc.holiday_days + gc.donor_days)
+      ELSE fg.gmv
+    END AS adjusted_gmv,
+    CASE 
+      WHEN fg.is_donor = 1 OR fg.is_holiday = 1 THEN dv.donor_product_sold / (gc.holiday_days + gc.donor_days)
+      ELSE fg.product_sold
+    END AS adjusted_product_sold
+  FROM flag_grouped fg
+  JOIN group_counts gc ON fg.id_brand = gc.id_brand AND fg.donor_group = gc.donor_group
+  JOIN donor_values dv ON fg.id_brand = dv.id_brand AND fg.donor_group = dv.donor_group
+)
+  SELECT
+    created_at_date, id_brand,
+    ROUND(adjusted_total_tx, 2) AS total_tx,
+    ROUND(adjusted_gmv, 2) AS gmv,
+    ROUND(adjusted_product_sold, 2) AS product_sold,
+    CASE WHEN adjusted_total_tx <> 0 THEN ROUND(adjusted_gmv / adjusted_total_tx, 2) ELSE NULL END AS aov,
+    CASE WHEN adjusted_product_sold <> 0 THEN ROUND(adjusted_gmv / adjusted_product_sold, 2) ELSE NULL END AS rpu
+  FROM final_distribution
+  ORDER BY id_brand, created_at_date;
+
+END
+         </code></pre>
+          <p>
+          Trigger Logic:
+          <i>
+            <ol>
+              <li>
+                The first updates general transaction metadata (created_at, updated_at, channel, cs_name, etc.) in the transactions table.
+              </li>
+              <li>
+                The second updates product-related information (product, qty) in the product_sales table.
+              </li>
+            </ol>
+          </i>
+        </p>
+      </div>
+    </div>
+                            
+          <div class="col-lg-6">
+
+            <div class="position-sticky" style="top: 40px">
+              <div class="portfolio-description">
+                <h2>Trigger-Based Automation After Data Normalization to 2NF</h2>
+                <p>
+                  The project started with a denormalized table, transaction_amura, which stored all transaction details in a flat structure. To optimize data handling, especially for analysis and reporting, I normalized this table into two separate tables:
+                  <ul>
+                    <li>transactions: containing general transaction info</li>
+                    <li>product_sales: storing item-level sales data</li>
+                  </ul>
+                </p>
+                <p>
+                  This normalization from 1NF to 2NF made querying more efficient. However, it created an unintended challenge:
+                </p>
+                <p>
+                  The data analyst had to manually insert cleaned and processed data—pulled from marketplaces and transformed using Python and SQL—into the normalized tables one by one. Given the daily, weekly, and monthly increase in transaction volume, this manual process became overwhelming and error-prone.
+                </p>
+                <h2>Solution (Trigger Implementation):</h2>
+                <p>
+                 To address this, I created a set of MySQL triggers directly on the transaction_amura table. These triggers automate the population and synchronization of the normalized tables as follows:
+                </p>
+                <ol>
+                  <li><strong>AFTER INSERT Trigger:</strong></li>
+                    <ul>
+                      <li>
+                        Automatically inserts a new record into the transactions table when a new transaction appears in transaction_amura.
+                      </li>
+                      <li>
+                        Extracts the first product listed in the transaction to insert into product_sales.
+                      </li>
+                   </ul> 
+                  <li><strong>AFTER UPDATE Trigger:</strong></li>
+                    <ul>
+                      <li>Updates corresponding data in transactions and product_sales when relevant fields in transaction_amura change (e.g., user_name, channel, product, qty).</li>
+                    </ul>
+                   <li>
+                    <strong>AFTER DELETE Trigger:</strong>
+                  </li>
+                    <ul>
+                      <li>
+                        Removes the linked records in both normalized tables when a transaction is deleted from transaction_amura.
+                      </li>
+                    </ul>
+                  <p>This logic ensures real-time syncing between the original and normalized datasets without requiring any manual steps.</p>
+                </ol>
+                <h2>Result</h2>
+                 <ul>
+                   <li>Fully automated insertion and cleanup process.</li>
+                   <li>Reduced the analyst’s workload and minimized the chance of human error.</li>
+                   <li>Created a seamless pipeline where any change in the source (transaction_amura) is instantly reflected in the reporting tables.</li>
+                 </ul>
+                <h2>Impact</h2>
+                  <ul>
+                    <li>Saved 80% of manual entry time per day.</li>
+                    <li>Reduced human error in data insertion and deletion.</li>
+                    <li>Enabled analysts to focus more on insights and less on routine tasks.</li>
+                  </ul>
+                
+                <h2 class="text-left">Takeaway</h2>
+                <p>
+                  <i>"Efficiency isn’t just about speed, it’s about freeing minds from repetition to focus on results."</i>
+                </p>
+                <p>Implementing post-insert triggers can significantly enhance data workflows, especially when bridging between raw transactional tables and normalized analytical schemas. It also offloads manual burdens from analysts, allowing them to focus more on insight-generation than data wrangling.</p>
+
+              </div>
+
+              <div class="portfolio-info mt-5">
+                <h3>Project information</h3>
+                <ul>
+                  <li><strong>Category</strong>Database Management & Optimizations</li>
+                  <li><strong>Tools</strong>MySQL Workbench</li>
+                  <li><strong>Project date</strong>July - Present, 2025</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        
+
+    </section><!-- /Portfolio Details Section -->
+
+  </main>
+
+  <footer id="footer" class="footer">
+
+    <div class="container">
+      <div class="copyright text-center ">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">EasyFolio</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="social-links d-flex justify-content-center">
+        <a href="mailto:amaliashalsa8@gmail.com" class="email"><i class="bi bi-envelope-at"></i></a>
+        <a href="https://www.linkedin.com/in/salsa-ainun-amalia8/" class="linkedin"><i class="bi bi-linkedin"></i></a>
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you've purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="assets/js/main.js"></script>
+
+  <!-- Prism Core -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+<!-- Komponen SQL -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-sql.min.js"></script>
+
+<!-- Plugin Toolbar (label bahasa) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/toolbar/prism-toolbar.min.js"></script>
+
+</body>
+
+</html>
