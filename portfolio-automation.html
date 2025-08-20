@@ -438,86 +438,66 @@ final_distribution AS (
 
 END
          </code></pre>
-          <p>
-          Trigger Logic:
-          <i>
-            <ol>
-              <li>
-                The first updates general transaction metadata (created_at, updated_at, channel, cs_name, etc.) in the transactions table.
-              </li>
-              <li>
-                The second updates product-related information (product, qty) in the product_sales table.
-              </li>
-            </ol>
-          </i>
-        </p>
       </div>
                             
           <div class="col-lg-6">
 
             <div class="position-sticky" style="top: 40px">
               <div class="portfolio-description">
-                <h2>Trigger-Based Automation After Data Normalization to 2NF</h2>
+                <h2>MySQL stored procedures for Complex SQL Queries</h2>
                 <p>
-                  The project started with a denormalized table, transaction_amura, which stored all transaction details in a flat structure. To optimize data handling, especially for analysis and reporting, I normalized this table into two separate tables:
+                  A data analyst on my team approached me with a question:<br><i>"If we update the transaction_amura table, can two other tables also be updated automatically using this long query I’ve written?"</i>
+                </p>
+                <p>
+                  The analyst’s query was very detailed and included recursive CTEs, user-level transaction grouping, and daily summaries for reporting purposes. Their initial request was to turn this into a trigger so the summary tables would update automatically whenever transaction_amura changed.
+                </p>
+                
+                <h2>Solution (Procedure Implementation):</h2>
+                <p>
+                 At first glance, a trigger seemed possible. However, I identified several issues:<br>
                   <ul>
-                    <li>transactions: containing general transaction info</li>
-                    <li>product_sales: storing item-level sales data</li>
+                    <li><b>Performance Risks:</b> The query was long and complex. Running it as a trigger for every insert/update could severely impact performance.</li>
+                    <li><b>Maintainability:</b> Debugging or modifying a large query embedded inside a trigger would be difficult for the team.</li>
+                    <li><b>Access Limitations:</b> I had limited server privileges, which restricted my ability to schedule events or run background jobs automatically.</li>
                   </ul>
+                <br>This meant I needed to find a solution that was both practical and adaptable under these constraints.
                 </p>
-                <p>
-                  This normalization from 1NF to 2NF made querying more efficient. However, it created an unintended challenge:
-                </p>
-                <p>
-                  The data analyst had to manually insert cleaned and processed data—pulled from marketplaces and transformed using Python and SQL—into the normalized tables one by one. Given the daily, weekly, and monthly increase in transaction volume, this manual process became overwhelming and error-prone.
-                </p>
-                <h2>Solution (Trigger Implementation):</h2>
-                <p>
-                 To address this, I created a set of MySQL triggers directly on the transaction_amura table. These triggers automate the population and synchronization of the normalized tables as follows:
-                </p>
+                <h2>Solutions</h2>
+                <p>I proposed a different approach:<br>
                 <ol>
-                  <li><strong>AFTER INSERT Trigger:</strong></li>
+                  <li><strong>Stored Procedure Instead of Trigger</strong></li>
                     <ul>
-                      <li>
-                        Automatically inserts a new record into the transactions table when a new transaction appears in transaction_amura.
-                      </li>
-                      <li>
-                        Extracts the first product listed in the transaction to insert into product_sales.
-                      </li>
+                      <li>I encapsulated the analyst’s long query into a stored procedure.</li>
+                      <li>This made the query reusable, easier to maintain, and callable on demand.</li>
                    </ul> 
-                  <li><strong>AFTER UPDATE Trigger:</strong></li>
+                  <li><strong>Automation Plan (Event Scheduler)</strong></li>
                     <ul>
-                      <li>Updates corresponding data in transactions and product_sales when relevant fields in transaction_amura change (e.g., user_name, channel, product, qty).</li>
+                      <li>My initial idea was to schedule the procedure via MySQL Event Scheduler (e.g., every 9PM).</li>
+                      <li>However, due to lack of privileges, I couldn’t create events on the production database.</li>
                     </ul>
                    <li>
-                    <strong>AFTER DELETE Trigger:</strong>
+                    <strong>Practical Compromise</strong>
                   </li>
                     <ul>
-                      <li>
-                        Removes the linked records in both normalized tables when a transaction is deleted from transaction_amura.
-                      </li>
+                      <li>I recommended that the analyst call the stored procedure manually whenever they needed fresh data.</li>
+                      <li>This struck a balance between automation and accessibility, while avoiding risks of uncontrolled triggers.</li>
                     </ul>
-                  <p>This logic ensures real-time syncing between the original and normalized datasets without requiring any manual steps.</p>
                 </ol>
-                <h2>Result</h2>
-                 <ul>
-                   <li>Fully automated insertion and cleanup process.</li>
-                   <li>Reduced the analyst’s workload and minimized the chance of human error.</li>
-                   <li>Created a seamless pipeline where any change in the source (transaction_amura) is instantly reflected in the reporting tables.</li>
-                 </ul>
+                </p>
                 <h2>Impact</h2>
-                  <ul>
-                    <li>Saved 80% of manual entry time per day.</li>
-                    <li>Reduced human error in data insertion and deletion.</li>
-                    <li>Enabled analysts to focus more on insights and less on routine tasks.</li>
-                  </ul>
+                 <ul>
+                   <li><b>Reduced Complexity:</b> The long SQL query was modularized into a stored procedure, making it maintainable and reusable.</li>
+                   <li><b>Improved Performance Safety:</b> Avoided embedding heavy queries in triggers that could slow down transactions.</li>
+                   <li><b>Flexibility for Analysts:</b> Analysts could run the procedure only when necessary, instead of depending on system-level automation.</li>
+                   <li><b>Cross-Team Collaboration:</b> Strengthened collaboration between IT and CRM teams by aligning technical feasibility with business needs.</li>
+                 </ul>
                 
                 <h2 class="text-left">Takeaway</h2>
                 <p>
-                  <i>"Efficiency isn’t just about speed, it’s about freeing minds from repetition to focus on results."</i>
+                  <i>"Constraints can be the best teachers of adaptability."</i>
                 </p>
-                <p>Implementing post-insert triggers can significantly enhance data workflows, especially when bridging between raw transactional tables and normalized analytical schemas. It also offloads manual burdens from analysts, allowing them to focus more on insight-generation than data wrangling.</p>
-
+                <p>From this task, I learned that technical limitations don’t have to be blockers — they can be opportunities to sharpen problem-solving skills. Initially, I thought the only solution was to implement a trigger, but since access restrictions made it impossible, I explored procedures and event scheduling instead. When events also weren’t feasible, I realized that practicality mattered more than overengineering, so I suggested a manual procedure call that still solved the business need.</p>
+                <p>This experience strengthened my SQL skills, particularly in designing procedures, while also teaching me the importance of adaptability, clear communication with analysts, and focusing on solutions that balance technical soundness with organizational constraints.</p>
               </div>
 
               <div class="portfolio-info mt-5">
